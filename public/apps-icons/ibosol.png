@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>IBO Player | Premium media player</title>
+    <meta name="description"
+          content="IBO Player is a premium media player that supports M3U and M3U8 playlists. It is designed for IPTV providers and offers a user-friendly interface."
+          data-rh="true"
+    />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
+    <meta name="google-site-verification" content="HeUFhl5wlO1rhSXw3wCxRQs9kDbUfDY8CuRkhRjA-DY" />
+
+    <script src="https://analytics.ahrefs.com/analytics.js" data-key="UXAVXqQUgfavURpru1SHaA" async></script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-TTYMK47NL8"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-TTYMK47NL8');
+    </script>
+    <script type="module" crossorigin src="/assets/index-CCyfUuA-.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-raFOpQl_.css">
+  </head>
+  <body class="font-main">
+    <div id="root" class="flex flex-col justify-between min-h-screen"></div>
+  </body>
+</html>
