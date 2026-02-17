@@ -48,8 +48,8 @@ const ServerComparison = () => {
                                 <th className="p-4 border border-white/10 text-primary">الميزة</th>
                                 <th className="p-4 border border-white/10 text-white">كابتن</th>
                                 <th className="p-4 border border-white/10 text-white">نوفا</th>
-                                <th className="p-4 border border-white/10 text-white font-bold text-primary">مارفل (الأفضل)</th>
-                                <th className="p-4 border border-white/10 text-white">هيدرا</th>
+                                <th className="p-4 border border-white/10 text-white">مارفل</th>
+                                <th className="p-4 border border-white/10 text-primary font-bold">هيدرا (الأقوى)</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -58,8 +58,8 @@ const ServerComparison = () => {
                                     <td className="p-4 border border-white/10 font-bold text-foreground/80">{row.feature}</td>
                                     <td className="p-4 border border-white/10 text-muted-foreground">{row.captain}</td>
                                     <td className="p-4 border border-white/10 text-muted-foreground">{row.nova}</td>
-                                    <td className="p-4 border border-white/10 text-primary font-bold">{row.marvel}</td>
-                                    <td className="p-4 border border-white/10 text-muted-foreground">{row.hydra}</td>
+                                    <td className="p-4 border border-white/10 text-muted-foreground">{row.marvel}</td>
+                                    <td className="p-4 border border-white/10 text-primary font-bold">{row.hydra}</td>
                                 </tr>
                             ))}
                         </tbody>

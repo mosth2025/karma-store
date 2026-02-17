@@ -53,10 +53,12 @@ export const servers: ServerData[] = [
         name: "VIP Bundle",
         prices: { EG: 1200, SA: 220, AE: 220, JO: 50, KW: 20, US: 60 },
         features: ["12 شهر اشتراك", "سيرفرين (2) مختلفين", "جودة 4K فائقة", "ضمان Thabat"],
+        popular: true,
     },
     {
         name: "ELITE Triple",
         prices: { EG: 1600, SA: 300, AE: 300, JO: 70, KW: 30, US: 80 },
         features: ["12 شهر اشتراك", "3 سيرفرات مختلفة", "أقصى استقرار ممكن", "أولوية التفعيل"],
+        popular: true,
     },
 ];
