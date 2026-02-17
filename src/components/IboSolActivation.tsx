@@ -12,50 +12,54 @@ import { reportEvent } from "@/lib/reporter";
 
 const APP_CATEGORIES = [
     {
-        name: "IBO Suite & VPN",
+        id: "ibosol",
+        name: "عائلة IBO Sol (باقة 4 تطبيقات)",
+        type: "bundle",
+        note: "يمكنك اختيار حتى 4 تطبيقات وتفعيلهم بنفس السعر",
         apps: [
             { id: "ibopro", name: "IBOPLAYER + IBOAPPS", color: "from-red-600/10", img: "/apps-icons/ibopro.png" },
-            { id: "hushplay", name: "HUSHPLAY", color: "from-green-500/10", img: "/apps-icons/ibo_special.png" },
-            { id: "ibovpn", name: "IBO VPN PLAYER", color: "from-red-600/10", img: "/apps-icons/ibovpn.png" },
+            { id: "bobplayer", name: "BOBPLAYER", color: "from-blue-500/10", img: "/apps-icons/bobplayer.png" },
             { id: "ibosolplayer", name: "IBOSOLPlayer", color: "from-emerald-500/10", img: "/apps-icons/ibosolplayer.png" },
-            { id: "smartersvpn", name: "SMARTERS VPN PLAYER", color: "from-blue-500/10", img: "/apps-icons/smartersvpn.png" },
+            { id: "hushplay", name: "HUSHPLAY", color: "from-green-500/10", img: "/apps-icons/ibo_special.png" },
+            { id: "bobpro", name: "BOBPRO", color: "from-red-600/10", img: "/apps-icons/bobpro.png" },
+            { id: "bobpremium", name: "BOBPREMIUM", color: "from-green-400/10", img: "/apps-icons/bobpremium.png" },
+            { id: "king4kplayer", name: "KING4KPLAYER", color: "from-amber-600/10", img: "/apps-icons/bob_special.png" },
+            { id: "flixnet", name: "FLIXNET", color: "from-green-600/10", img: "/apps-icons/flixnet.png" },
+            { id: "abeplayer", name: "ABEPlayerTV", color: "from-yellow-400/10", img: "/apps-icons/abeplayer.png" },
+            { id: "macplayer", name: "MACPLAYER", color: "from-red-500/10", img: "/apps-icons/macplayer.png" },
+            { id: "virginia", name: "VIRGINIA", color: "from-purple-500/10", img: "/apps-icons/virginia.png" },
+            { id: "allplayer", name: "AllPlayer", color: "from-orange-500/10", img: "/apps-icons/allplayer.png" },
+            { id: "duplex", name: "DUPLEX", color: "from-cyan-500/10", img: "/apps-icons/duplex.png" },
+            { id: "ktnplayer", name: "KTNPLAYER", color: "from-blue-400/10", img: "/apps-icons/ktnplayer.png" },
+            { id: "familyplayer", name: "FAMILYPLAYER", color: "from-red-600/10", img: "/apps-icons/familyplayer.png" },
+            { id: "ibossplayer", name: "IBOSSPLAYER", color: "from-rose-500/10", img: "/apps-icons/ibossplayer.png" },
+            { id: "ibostb", name: "IBOSTB", color: "from-blue-800/10", img: "/apps-icons/ibostb.png" },
+            { id: "iboxxplayer", name: "IBOXX IPTV", color: "from-orange-600/10", img: "/apps-icons/iboxxplayer.png" },
         ]
     },
     {
-        name: "Sports Legends",
+        id: "cr7_family",
+        name: "عائلة CR7 Player (باقة 4 تطبيقات)",
+        type: "bundle",
+        note: "يمكنك اختيار حتى 4 تطبيقات من هذه العائلة",
         apps: [
             { id: "cr7", name: "CR7 PLAYER", color: "from-yellow-600/10", img: "/apps-icons/cr7.png" },
             { id: "messi", name: "MESSI PLAYER", color: "from-blue-600/10", img: "/apps-icons/messi.png" },
         ]
     },
     {
-        name: "Premium Players",
+        id: "single",
+        name: "تفعيل فردي (تطبيق واحد فقط)",
+        type: "single",
+        note: "هذه التطبيقات تتطلب تفعيل منفصل لكل تطبيق",
         apps: [
-            { id: "bobplayer", name: "BOBPLAYER", color: "from-blue-500/10", img: "/apps-icons/bobplayer.png" },
-            { id: "bobpro", name: "BOBPRO", color: "from-red-600/10", img: "/apps-icons/bobpro.png" },
-            { id: "bobpremium", name: "BOBPREMIUM", color: "from-green-400/10", img: "/apps-icons/bobpremium.png" },
-            { id: "king4kplayer", name: "KING4KPLAYER", color: "from-amber-600/10", img: "/apps-icons/bob_special.png" },
-            { id: "duplex", name: "DUPLEX", color: "from-cyan-500/10", img: "/apps-icons/duplex.png" },
-            { id: "flixnet", name: "FLIXNET", color: "from-green-600/10", img: "/apps-icons/flixnet.png" },
             { id: "smartone", name: "SMARTONE PRO", color: "from-blue-900/10", img: "/apps-icons/smartone.png" },
             { id: "smartoneiptv", name: "SMARTONE IPTV", color: "from-blue-600/10", img: "/apps-icons/smartoneiptv.webp" },
-        ]
-    },
-    {
-        name: "Classic Players",
-        apps: [
-            { id: "abeplayer", name: "ABEPlayerTV", color: "from-yellow-400/10", img: "/apps-icons/abeplayer.png" },
-            { id: "macplayer", name: "MACPLAYER", color: "from-red-500/10", img: "/apps-icons/macplayer.png" },
-            { id: "virginia", name: "VIRGINIA", color: "from-purple-500/10", img: "/apps-icons/virginia.png" },
-            { id: "allplayer", name: "AllPlayer", color: "from-orange-500/10", img: "/apps-icons/allplayer.png" },
-            { id: "ktnplayer", name: "KTNPLAYER", color: "from-blue-400/10", img: "/apps-icons/ktnplayer.png" },
-            { id: "familyplayer", name: "FAMILYPLAYER", color: "from-red-600/10", img: "/apps-icons/familyplayer.png" },
-            { id: "ibossplayer", name: "IBOSSPLAYER", color: "from-rose-500/10", img: "/apps-icons/ibossplayer.png" },
-            { id: "ibostb", name: "IBOSTB", color: "from-blue-800/10", img: "/apps-icons/ibostb.png" },
-            { id: "iboxxplayer", name: "IBOXX IPTV", color: "from-orange-600/10", img: "/apps-icons/iboxxplayer.png" },
-            { id: "ora", name: "ORA PLAYER", color: "from-purple-600/10", img: "/apps-icons/ora.png" },
             { id: "smarters", name: "SMARTERS PLAYER", color: "from-sky-500/10", img: "/apps-icons/smarters.png" },
+            { id: "ora", name: "ORA PLAYER", color: "from-purple-600/10", img: "/apps-icons/ora.png" },
             { id: "hotplayer", name: "HOT PLAYER", color: "from-orange-600/10", img: "/apps-icons/hotplayer.svg" },
+            { id: "smartersvpn", name: "SMARTERS VPN PLAYER", color: "from-blue-500/10", img: "/apps-icons/smartersvpn.png" },
+            { id: "ibovpn", name: "IBO VPN PLAYER", color: "from-red-600/10", img: "/apps-icons/ibovpn.png" },
         ]
     }
 ];
@@ -119,18 +123,42 @@ const IboSolActivation = () => {
     const { price: currentPrice, currency: currentCurrency } = getPriceData();
 
     const toggleApp = (appId: string) => {
+        const category = APP_CATEGORIES.find(cat => cat.apps.some(a => a.id === appId));
+        if (!category) return;
+
         if (selectedApps.includes(appId)) {
             setSelectedApps(selectedApps.filter((id) => id !== appId));
         } else {
-            if (selectedApps.length >= 4) {
+            // Check if we already have apps from a different group
+            const currentCategoryId = APP_CATEGORIES.find(cat =>
+                cat.apps.some(a => a.id === selectedApps[0])
+            )?.id;
+
+            if (selectedApps.length > 0 && currentCategoryId !== category.id) {
+                // Switching categories - clear previous and switch
+                setSelectedApps([appId]);
                 toast({
-                    title: "عفواً! تجاوزت الحد الأقصى",
-                    description: "يمكنك اختيار حتى 4 تطبيقات فقط في العرض الواحد.",
-                    variant: "destructive",
+                    title: "تنبيه الانتقال",
+                    description: `لقد اخترت تطبيقاً من ${category.name}. تم إلغاء التحديدات السابقة لأن هذه المجموعة لها تفعيل منفصل.`,
                 });
                 return;
             }
-            setSelectedApps([...selectedApps, appId]);
+
+            if (category.type === "single") {
+                // Individual activation only allows ONE at a time
+                setSelectedApps([appId]);
+            } else {
+                // Bundle activation allows up to 4
+                if (selectedApps.length >= 4) {
+                    toast({
+                        title: "عفواً! تجاوزت الحد الأقصى",
+                        description: "يمكنك اختيار حتى 4 تطبيقات فقط في العرض الواحد من نفس العائلة.",
+                        variant: "destructive",
+                    });
+                    return;
+                }
+                setSelectedApps([...selectedApps, appId]);
+            }
         }
     };
 
@@ -319,13 +347,26 @@ const IboSolActivation = () => {
                             </div>
                         </div>
 
-                        <div className="space-y-12">
+                        <div className="space-y-4 mb-10">
+                            <div className="bg-amber-500/10 border border-amber-500/20 p-5 rounded-2xl">
+                                <div className="flex gap-4">
+                                    <Info className="w-6 h-6 text-amber-500 shrink-0 mt-0.5" />
+                                    <div className="text-sm text-amber-100/70 leading-relaxed">
+                                        <p className="font-bold text-amber-500 mb-1 text-base">ملاحظة هامة لنظام العائلات:</p>
+                                        تفعيل الباقة (حتى 4 تطبيقات) يعمل فقط على تطبيقات من نفس "العائلة". عند اختيار تطبيق من عائلة مختلفة أو تفعيل فردي سيتم تغيير التحديد.
+                                        <span className="block mt-2 font-bold text-white">يجب تثبيت التطبيقات ورفع قائمة التشغيل عليها قبل طلب التفعيل.</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="space-y-16">
                             {APP_CATEGORIES.map((category) => (
-                                <div key={category.name} className="space-y-4">
-                                    <h4 className="text-[11px] font-bold text-white/40 uppercase tracking-[0.2em] px-2 flex items-center gap-4">
-                                        <span className="whitespace-nowrap">{category.name}</span>
-                                        <div className="h-px bg-white/10 w-full"></div>
-                                    </h4>
+                                <div key={category.id} className="space-y-6">
+                                    <div className="flex flex-col gap-1 border-r-4 border-primary pr-4">
+                                        <h3 className="text-xl font-black text-white tracking-tight">{category.name}</h3>
+                                        {category.note && <p className="text-xs text-muted-foreground">{category.note}</p>}
+                                    </div>
                                     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                                         {category.apps.map((app) => (
                                             <motion.div
@@ -333,8 +374,8 @@ const IboSolActivation = () => {
                                                 whileHover={{ scale: 1.05 }}
                                                 whileTap={{ scale: 0.95 }}
                                                 onClick={() => toggleApp(app.id)}
-                                                className={`relative cursor-pointer group rounded-2xl p-3 h-36 flex flex-col items-center justify-center text-center transition-all duration-500 border ${selectedApps.includes(app.id)
-                                                    ? "bg-gradient-to-br " + app.color + " border-primary shadow-[0_0_25px_rgba(var(--primary),0.15)]"
+                                                className={`relative cursor-pointer group rounded-2xl p-4 h-40 flex flex-col items-center justify-center text-center transition-all duration-500 border ${selectedApps.includes(app.id)
+                                                    ? "bg-gradient-to-br " + app.color + " border-primary shadow-[0_0_25px_rgba(234,179,8,0.2)]"
                                                     : "bg-white/5 border-white/5 hover:border-white/20 hover:bg-white/[0.07]"
                                                     }`}
                                             >
