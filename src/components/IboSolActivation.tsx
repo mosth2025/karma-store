@@ -57,13 +57,10 @@ const APP_CATEGORIES = [
         type: "single",
         note: "هذه التطبيقات تتطلب تفعيل منفصل لكل تطبيق",
         apps: [
-            { id: "single:smartone", name: "SMARTONE PRO", color: "from-blue-900/10", img: "/apps-icons/smartone.png" },
             { id: "single:smartoneiptv", name: "SMARTONE IPTV", color: "from-blue-600/10", img: "/apps-icons/smartoneiptv.webp" },
             { id: "single:smarters", name: "SMARTERS PLAYER", color: "from-sky-500/10", img: "/apps-icons/smarters.png" },
             { id: "single:ora", name: "ORA PLAYER", color: "from-purple-600/10", img: "/apps-icons/ora.png" },
             { id: "single:hotplayer", name: "HOT PLAYER", color: "from-orange-600/10", img: "/apps-icons/hotplayer.svg" },
-            { id: "single:smartersvpn", name: "SMARTERS VPN PLAYER", color: "from-blue-500/10", img: "/apps-icons/smartersvpn.png" },
-            { id: "single:ibovpn", name: "IBO VPN PLAYER", color: "from-red-600/10", img: "/apps-icons/ibovpn.png" },
         ]
     }
 ];
