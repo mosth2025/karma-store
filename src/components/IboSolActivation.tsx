@@ -98,22 +98,49 @@ const IboSolActivation = () => {
 
     const getPriceData = () => {
         const code = geoData?.country_code || "EG";
+        const selectedAppId = selectedApps[0]; // bundles have fixed price, singles are one-only
 
+        // Default: Bundle/Standard Tier (150/300 EGP)
         let annual = 150;
         let lifetime = 300;
         let currency = "جنيه";
 
-        if (code !== "EG") {
-            // International Defaults (Equivalent to 200/350 EGP)
-            annual = 4;
-            lifetime = 7;
-            currency = "$";
+        // Tier mapping for Egypt
+        if (selectedAppId?.includes('iboproapp') || selectedAppId?.includes('smarters') || selectedAppId?.includes('hotplayer')) {
+            annual = 200;
+            lifetime = 400;
+        } else if (selectedAppId?.includes('ora')) {
+            annual = 100;
+            lifetime = 200;
+        } else if (selectedAppId?.includes('smartone')) {
+            annual = 175;
+            lifetime = 810;
+        }
 
-            if (code === "SA") { currency = "ريال"; annual = 15; lifetime = 25; }
-            if (code === "AE") { currency = "درهم"; annual = 15; lifetime = 25; }
-            if (code === "JO") { currency = "دينار"; annual = 3; lifetime = 5; }
-            if (code === "KW") { currency = "دينار كويتي"; annual = 1.25; lifetime = 2.25; }
-            if (code === "QA") { currency = "ريال"; annual = 15; lifetime = 25; }
+        if (code !== "EG") {
+            const ratioA = annual / 150;
+            const ratioL = lifetime / 300;
+
+            currency = "$";
+            annual = Number((4 * ratioA).toFixed(1));
+            lifetime = Number((7 * ratioL).toFixed(1));
+
+            if (code === "SA" || code === "AE" || code === "QA") {
+                currency = code === "AE" ? "درهم" : "ريال";
+                annual = Math.round(15 * ratioA);
+                lifetime = Math.round(25 * ratioL);
+
+                // Fine-tuning for expensive Lifetime (SmartOne)
+                if (selectedAppId?.includes('smartone') && isLifetime) lifetime = 85;
+            } else if (code === "JO") {
+                currency = "دينار";
+                annual = Number((3 * ratioA).toFixed(1));
+                lifetime = Number((5 * ratioL).toFixed(1));
+            } else if (code === "KW") {
+                currency = "دينار كويتي";
+                annual = Number((1.25 * ratioA).toFixed(2));
+                lifetime = Number((2.25 * ratioL).toFixed(2));
+            }
         }
 
         return {
