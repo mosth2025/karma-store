@@ -35,6 +35,7 @@ const APP_CATEGORIES = [
             { id: "ibosol:ibossplayer", name: "IBOSSPLAYER", color: "from-rose-500/10", img: "/apps-icons/ibossplayer.png" },
             { id: "ibosol:ibostb", name: "IBOSTB", color: "from-blue-800/10", img: "/apps-icons/ibostb.png" },
             { id: "ibosol:iboxxplayer", name: "IBOXX IPTV", color: "from-orange-600/10", img: "/apps-icons/iboxxplayer.png" },
+            { id: "ibosol:smartone", name: "SMARTONE PRO", color: "from-blue-900/10", img: "/apps-icons/smartone.png" },
         ]
     },
     {
