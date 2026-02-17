@@ -1,4 +1,5 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
+import Tesseract from "tesseract.js";
 import { motion, AnimatePresence } from "framer-motion";
 import { Check, Info, ShieldCheck, Zap, Laptop, Tv, Smartphone, MessageCircle, Camera, User, Phone, Loader2, Image as ImageIcon, Globe } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -144,10 +145,14 @@ const IboSolActivation = () => {
         });
 
         try {
-            const Tesseract = (await import('tesseract.js')).default;
-            const { data: { text } } = await Tesseract.recognize(file, 'eng');
+            const { data: { text } } = await Tesseract.recognize(file, 'eng', {
+                logger: m => console.log("[OCR Progress]", m)
+            });
 
             console.log("OCR Raw Text:", text);
+
+            const textLow = text.toLowerCase();
+            const textClean = textLow.replace(/[^a-z0-9]/g, '');
 
             let detectedSite = "";
             if (textLow.includes("smarter") || textClean.includes("smarterspro")) {
@@ -205,8 +210,8 @@ const IboSolActivation = () => {
         } catch (error) {
             console.error("Scan error:", error);
             toast({
-                title: "خطأ في التحميل",
-                description: "تأكد من اتصال الإنترنت وحاول مرة أخرى.",
+                title: "خطأ في الاتصال أو التحميل",
+                description: "المرة الأولى قد تستغرق وقتاً لتحميل ملفات التعريف (0.5MB). يرجى التأكد من الإنترنت والمحاولة مرة أخرى.",
                 variant: "destructive",
             });
         } finally {
