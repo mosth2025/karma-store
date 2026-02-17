@@ -150,12 +150,16 @@ const IboSolActivation = () => {
             console.log("OCR Raw Text:", text);
 
             // 1. Extract Site/URL
-            const urlRegex = /(?:https?:\/\/)?(?:www\.)?([a-zA-Z0-9-]+\.[a-zA-Z]{2,}(?:\/\S*)?)/gi;
-            const urlMatch = text.match(urlRegex);
-            if (urlMatch && urlMatch.length > 0) {
-                // Clean the URL to get just the domain if possible, or keep as is
-                const cleanedSite = urlMatch[0].replace(/https?:\/\/|www\./gi, '').split('/')[0];
-                setUploadSite(cleanedSite);
+            const textLower = text.toLowerCase();
+            if (textLower.includes("smarterspro")) {
+                setUploadSite("smartersproplayer.net");
+            } else {
+                const urlRegex = /(?:https?:\/\/)?(?:www\.)?([a-zA-Z0-9-]+\.[a-zA-Z]{2,}(?:\/\S*)?)/gi;
+                const urlMatch = text.match(urlRegex);
+                if (urlMatch && urlMatch.length > 0) {
+                    const domainMatch = urlMatch[0].replace(/https?:\/\/|www\./gi, '').split('/')[0];
+                    setUploadSite(domainMatch);
+                }
             }
 
             // 2. Extract MAC preserving case
