@@ -149,25 +149,26 @@ const IboSolActivation = () => {
 
             console.log("OCR Raw Text:", text);
 
-            // 1. Extract Site/URL (More Robust)
-            const textLower = text.toLowerCase().replace(/\s/g, ''); // Remove spaces for better matching
+            // 1. Extract Site/URL (Ultra Robust fuzzy matching)
+            const textLow = text.toLowerCase();
+            const textClean = textLow.replace(/[^a-z0-9]/g, ''); // Clear all non-alphanumeric chars for deep matching
 
-            if (textLower.includes("smarterspro") || textLower.includes("smtspro")) {
+            if (textLow.includes("smarter") || textClean.includes("smarterspro") || textClean.includes("smtspro")) {
                 setUploadSite("smartersproplayer.net");
-            } else if (textLower.includes("iboplayer") || textLower.includes("ibopro")) {
+            } else if (textLow.includes("ibo") || textClean.includes("ibopro")) {
                 setUploadSite("iboplayer.com");
-            } else if (textLower.includes("bobplayer") || textLower.includes("bobpro")) {
+            } else if (textLow.includes("bob") || textClean.includes("bobpro")) {
                 setUploadSite("bobplayer.com");
-            } else if (textLower.includes("smartone")) {
+            } else if (textLow.includes("smartone")) {
                 setUploadSite("smartone-iptv.com");
+            } else if (textLow.includes("hush")) {
+                setUploadSite("hushplay.app");
             } else {
-                const urlRegex = /(?:https?:\/\/)?(?:www\.)?([a-zA-Z0-9-]+\.[a-zA-Z]{2,}(?:\/\S*)?)/gi;
-                const urlMatch = text.match(urlRegex);
-                if (urlMatch && urlMatch.length > 0) {
-                    const domainMatch = urlMatch[0].replace(/https?:\/\/|www\./gi, '').split('/')[0];
-                    if (domainMatch.includes('.') && domainMatch.length > 5) {
-                        setUploadSite(domainMatch);
-                    }
+                // Fallback: Extract any domain looking string
+                const domainRegex = /([a-z0-9-]+\.(?:net|com|org|app|store|info|tv|xyz))/gi;
+                const matches = textLow.match(domainRegex);
+                if (matches && matches.length > 0) {
+                    setUploadSite(matches[0]);
                 }
             }
 
