@@ -1,5 +1,7 @@
 import { Tv, Zap, Film } from "lucide-react";
 import { motion } from "framer-motion";
+import { Button } from "@/components/ui/button";
+import { trackEvent } from "@/lib/analytics";
 import logo from "@/assets/karmastore-logo.webp";
 
 const Hero = () => {
@@ -63,6 +65,35 @@ const Hero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.8 }}
+            className="flex flex-wrap items-center justify-center gap-4 mb-12"
+          >
+            <Button
+              size="lg"
+              className="bg-primary hover:bg-white text-primary-foreground hover:text-primary font-black text-lg px-8 py-7 rounded-2xl transition-all duration-300 shadow-[0_10px_30px_rgba(var(--primary),0.3)] hover:scale-105"
+              onClick={() => {
+                trackEvent("hero_cta_click", { target: "servers" });
+                document.getElementById('servers')?.scrollIntoView({ behavior: 'smooth' });
+              }}
+            >
+              🚀 اشترك الآن
+            </Button>
+            <Button
+              size="lg"
+              variant="outline"
+              className="bg-white/5 border-white/10 hover:bg-white/10 text-white font-bold text-lg px-8 py-7 rounded-2xl transition-all duration-300 backdrop-blur-md"
+              onClick={() => {
+                trackEvent("hero_cta_click", { target: "downloads" });
+                document.getElementById('downloads')?.scrollIntoView({ behavior: 'smooth' });
+              }}
+            >
+              📥 مركز التحميل
+            </Button>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1 }}
             className="flex flex-wrap items-center justify-center gap-8 text-foreground/80 font-medium"
           >
             <div className="flex items-center gap-3 bg-white/5 px-4 py-2 rounded-xl border border-white/5">

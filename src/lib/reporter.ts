@@ -1,7 +1,4 @@
-/**
- * Reporting Utility for Karma Store
- * Tracks orders and interactions to provide a "live" feeling to the owner.
- */
+import { trackEvent } from "./analytics";
 
 const API_BASE = "http://localhost:3001/api"; // Adjust for production
 
@@ -14,6 +11,12 @@ export interface ReportPayload {
 export const reportEvent = async (payload: ReportPayload) => {
     try {
         console.log(`[Reporter] Sending event: ${payload.event}`, payload.details);
+
+        // Google Analytics Event
+        trackEvent(payload.event, {
+            description: payload.details,
+            ...payload.metadata
+        });
 
         // Non-blocking report call
         fetch(`${API_BASE}/report`, {

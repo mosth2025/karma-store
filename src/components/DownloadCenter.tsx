@@ -1,30 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Monitor, Smartphone, Tv2, Download, Laptop, Info } from "lucide-react";
-
-const apps = [
-    {
-        name: "IPTV Smarters Pro",
-        platform: "Android / APK",
-        icon: <Smartphone className="w-10 h-10" />,
-        link: "#",
-        bestFor: "أجهزة الأندرويد والشاشات",
-    },
-    {
-        name: "VLC Media Player",
-        platform: "Windows / Mac",
-        icon: <Monitor className="w-10 h-10" />,
-        link: "#",
-        bestFor: "الكمبيوتر واللابتوب",
-    },
-    {
-        name: "Smart IPTV",
-        platform: "Smart TV",
-        icon: <Tv2 className="w-10 h-10" />,
-        link: "#",
-        bestFor: "شاشات سامسونج وإل جي",
-    },
-];
+import { trackEvent } from "@/lib/analytics";
 
 const DEVICE_CATEGORIES = [
     {
@@ -130,10 +107,13 @@ const DownloadCenter = () => {
                     {DEVICE_CATEGORIES.map((cat) => (
                         <button
                             key={cat.id}
-                            onClick={() => setActiveTab(cat.id)}
+                            onClick={() => {
+                                setActiveTab(cat.id);
+                                trackEvent("download_tab_click", { device: cat.id });
+                            }}
                             className={`flex items-center gap-3 px-8 py-4 rounded-2xl font-bold transition-all duration-300 ${activeTab === cat.id
-                                ? "bg-primary text-black shadow-[0_0_20px_rgba(251,191,36,0.3)] scale-105"
-                                : "bg-white/5 text-white/60 hover:bg-white/10"
+                                    ? "bg-primary text-black shadow-[0_0_20px_rgba(251,191,36,0.3)] scale-105"
+                                    : "bg-white/5 text-white/60 hover:bg-white/10"
                                 }`}
                         >
                             {cat.icon}
@@ -163,8 +143,8 @@ const DownloadCenter = () => {
                                         className="glass-effect p-6 rounded-[2rem] border border-white/5 flex flex-col items-center text-center relative group overflow-hidden"
                                     >
                                         <div className={`w-20 h-20 rounded-2xl mb-4 p-3 flex items-center justify-center transition-transform group-hover:scale-110 shadow-xl border border-white/20 ${app.name.toLowerCase().includes('smarters') || app.name.toLowerCase().includes('hot player')
-                                            ? "bg-slate-900"
-                                            : "bg-gray-100"
+                                                ? "bg-slate-900"
+                                                : "bg-gray-100"
                                             }`}>
                                             {app.img ? (
                                                 <img src={app.img} alt={app.name} className="w-full h-full object-contain" />
@@ -186,6 +166,7 @@ const DownloadCenter = () => {
                                                 href={app.link}
                                                 target="_blank"
                                                 rel="noopener noreferrer"
+                                                onClick={() => trackEvent("app_download_click", { app_name: app.name, platform: cat.id })}
                                                 className="w-full bg-primary/10 hover:bg-primary text-primary hover:text-black py-3 rounded-xl transition-all duration-300 font-bold text-xs flex items-center justify-center gap-2"
                                             >
                                                 {app.buttonText || "تحميل الآن"} <Download className="w-4 h-4" />
@@ -233,6 +214,5 @@ const DownloadCenter = () => {
         </section>
     );
 };
-
 
 export default DownloadCenter;

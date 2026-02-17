@@ -1,6 +1,7 @@
 import { MessageCircle, HelpCircle, Server, Download, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { trackEvent } from "@/lib/analytics";
 import logo from "@/assets/karmastore-logo.webp";
 
 const Header = () => {
@@ -82,6 +83,7 @@ const Header = () => {
               href="https://wa.me/201114417978"
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => trackEvent("whatsapp_click", { location: "header_contact" })}
             >
               <MessageCircle className="w-3 h-3 md:w-4 md:h-4" />
               تواصل

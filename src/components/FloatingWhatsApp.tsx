@@ -1,5 +1,6 @@
 import { MessageCircle } from "lucide-react";
 import { motion } from "framer-motion";
+import { trackEvent } from "@/lib/analytics";
 
 const FloatingWhatsApp = () => {
     return (
@@ -7,6 +8,7 @@ const FloatingWhatsApp = () => {
             href="https://wa.me/201114417978"
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => trackEvent("whatsapp_click", { location: "floating_button" })}
             initial={{ scale: 0, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             whileHover={{ scale: 1.1, rotate: 10 }}

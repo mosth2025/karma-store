@@ -1,4 +1,5 @@
 import { Send, MessageCircle, ShieldCheck, Globe } from "lucide-react";
+import { trackEvent } from "@/lib/analytics";
 
 const Footer = () => {
   return (
@@ -19,6 +20,7 @@ const Footer = () => {
                 href="https://wa.me/201114417978"
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => trackEvent("whatsapp_click", { location: "footer" })}
                 className="flex items-center gap-2 bg-primary text-primary-foreground px-8 py-3 rounded-full font-black hover:scale-105 transition-transform shadow-lg shadow-primary/20"
               >
                 <MessageCircle className="w-5 h-5" />
@@ -28,6 +30,7 @@ const Footer = () => {
                 href="https://t.me/KARMASALES2"
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => trackEvent("telegram_click", { location: "footer" })}
                 className="flex items-center gap-2 bg-white/5 border border-white/10 text-white px-8 py-3 rounded-full font-black hover:bg-white/10 transition-colors"
               >
                 <Send className="w-5 h-5" />
