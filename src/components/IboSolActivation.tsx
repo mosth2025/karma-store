@@ -91,21 +91,21 @@ const IboSolActivation = () => {
     const getPriceData = () => {
         const code = geoData?.country_code || "EG";
 
-        let annual = 140;
-        let lifetime = 250;
+        let annual = 150;
+        let lifetime = 300;
         let currency = "جنيه";
 
         if (code !== "EG") {
             // International Defaults
-            annual = 10;
-            lifetime = 18;
+            annual = 12;
+            lifetime = 22;
             currency = "$";
 
-            if (code === "SA") { currency = "ريال"; annual = 40; lifetime = 75; }
-            if (code === "AE") { currency = "درهم"; annual = 40; lifetime = 75; }
-            if (code === "JO") { currency = "دينار"; annual = 8; lifetime = 14; }
-            if (code === "KW") { currency = "دينار كويتي"; annual = 3; lifetime = 6; }
-            if (code === "QA") { currency = "ريال"; annual = 40; lifetime = 75; }
+            if (code === "SA") { currency = "ريال"; annual = 45; lifetime = 90; }
+            if (code === "AE") { currency = "درهم"; annual = 45; lifetime = 90; }
+            if (code === "JO") { currency = "دينار"; annual = 9; lifetime = 18; }
+            if (code === "KW") { currency = "دينار كويتي"; annual = 4; lifetime = 8; }
+            if (code === "QA") { currency = "ريال"; annual = 45; lifetime = 90; }
         }
 
         return {
