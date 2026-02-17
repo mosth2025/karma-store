@@ -19,7 +19,7 @@ const PriceBubble = () => {
     };
 
     return (
-        <div className="fixed bottom-36 right-4 md:right-10 z-[150] pointer-events-none">
+        <div className="fixed bottom-32 right-4 md:right-10 z-[150] pointer-events-none">
             <AnimatePresence>
                 {isVisible && !isPopped && (
                     <motion.div
@@ -35,19 +35,19 @@ const PriceBubble = () => {
                         onClick={handlePop}
                     >
                         {/* The Bubble Shell */}
-                        <div className="w-16 h-16 md:w-20 md:h-20 bg-primary/20 backdrop-blur-md border-2 border-primary/50 rounded-full flex items-center justify-center shadow-[0_0_30px_rgba(var(--primary),0.3)] overflow-hidden">
+                        <div className="w-12 h-12 md:w-20 md:h-20 bg-primary/20 backdrop-blur-md border-2 border-primary/50 rounded-full flex items-center justify-center shadow-[0_0_30px_rgba(var(--primary),0.3)] overflow-hidden">
                             <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent pointer-events-none" />
-                            <Globe className="w-8 h-8 md:w-10 md:h-10 text-primary animate-pulse" />
+                            <Globe className="w-6 h-6 md:w-10 md:h-10 text-primary animate-pulse" />
 
                             {/* Reflection line */}
-                            <div className="absolute top-2 left-4 w-4 h-2 bg-white/40 rounded-full -rotate-45" />
+                            <div className="absolute top-1.5 left-2.5 w-3 h-1.5 bg-white/40 rounded-full -rotate-45" />
                         </div>
 
                         {/* Content Tooltip - Expands UP on mobile, LEFT on desktop */}
                         <motion.div
                             initial={{ y: 20, opacity: 0 }}
                             animate={{ y: 0, opacity: 1 }}
-                            className="absolute bottom-full mb-4 right-0 md:bottom-1/2 md:translate-y-1/2 md:right-full md:mr-4 bg-card/90 backdrop-blur-xl border border-white/10 p-4 rounded-2xl w-[85vw] md:w-64 shadow-2xl shadow-black z-[160]"
+                            className="absolute bottom-full mb-4 right-0 md:bottom-1/2 md:translate-y-1/2 md:right-full md:mr-4 bg-card/90 backdrop-blur-xl border border-white/10 p-3 rounded-2xl w-[70vw] md:w-64 shadow-2xl shadow-black z-[160]"
                         >
                             <div className="flex items-start gap-3">
                                 <div className="mt-1 bg-primary/20 p-1.5 rounded-full">

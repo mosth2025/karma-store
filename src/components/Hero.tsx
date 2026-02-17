@@ -4,7 +4,7 @@ import logo from "@/assets/karmastore-logo.webp";
 
 const Hero = () => {
   return (
-    <section className="pt-24 pb-16 md:pt-32 md:pb-24 bg-[var(--gradient-hero)] relative overflow-hidden">
+    <section className="pt-16 pb-12 md:pt-32 md:pb-24 bg-[var(--gradient-hero)] relative overflow-hidden">
       {/* Premium background decorative elements */}
       <div className="premium-blur top-[-10%] right-[-5%] w-[500px] h-[500px] bg-primary/20" />
       <div className="premium-blur bottom-[-10%] left-[-5%] w-[600px] h-[600px] bg-secondary/10" />
@@ -23,7 +23,7 @@ const Hero = () => {
               <img
                 src={logo}
                 alt="Karma Store"
-                className="relative h-36 md:h-52 object-contain drop-shadow-[0_0_50px_rgba(var(--primary),0.6)] animate-pulse-slow active:scale-95 transition-transform"
+                className="relative h-28 md:h-52 object-contain drop-shadow-[0_0_50px_rgba(var(--primary),0.6)] animate-pulse-slow active:scale-95 transition-transform"
               />
             </div>
           </motion.div>

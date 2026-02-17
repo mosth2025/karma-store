@@ -4,8 +4,8 @@ import { Moon, Star } from "lucide-react";
 const RamadanDecorations = () => {
     return (
         <div className="fixed inset-0 pointer-events-none z-[60] overflow-hidden">
-            {/* Top Hanging Zina (Decorations) */}
-            <div className="absolute top-0 left-0 w-full flex justify-around items-start opacity-70">
+            {/* Top Hanging Zina (Decorations) - Hidden on mobile for less clutter */}
+            <div className="absolute top-0 left-0 w-full hidden md:flex justify-around items-start opacity-70">
                 {[...Array(8)].map((_, i) => (
                     <motion.div
                         key={i}
@@ -14,7 +14,7 @@ const RamadanDecorations = () => {
                         transition={{ delay: i * 0.1, duration: 1 }}
                         className="flex flex-col items-center"
                     >
-                        <div className="w-px h-16 md:h-24 bg-gradient-to-b from-transparent via-amber-500/40 to-amber-500" />
+                        <div className="w-px h-24 bg-gradient-to-b from-transparent via-amber-500/40 to-amber-500" />
                         <motion.div
                             animate={{ scale: [1, 1.2, 1], opacity: [0.5, 1, 0.5] }}
                             transition={{ duration: 2, repeat: Infinity, delay: i * 0.3 }}
@@ -29,7 +29,7 @@ const RamadanDecorations = () => {
             <motion.div
                 drag
                 dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
-                className="absolute bottom-10 left-4 md:bottom-20 md:left-20 pointer-events-auto cursor-grab active:cursor-grabbing block scale-[0.2] md:scale-100 origin-bottom-left"
+                className="absolute bottom-10 left-4 md:bottom-20 md:left-20 pointer-events-auto cursor-grab active:cursor-grabbing block scale-[0.35] md:scale-100 origin-bottom-left"
                 animate={{
                     y: [0, -20, 0],
                     rotate: [-3, 3, -3]
@@ -95,22 +95,22 @@ const RamadanDecorations = () => {
                     <Moon className="w-8 h-8 md:w-24 md:h-24 text-amber-100 fill-amber-100/30 -rotate-12 drop-shadow-[0_0_10px_rgba(254,243,199,0.8)]" />
                 </div>
 
-                <div className="text-center">
+                <div className="text-center hidden md:block">
                     <p className="text-[10px] md:text-2xl font-black text-amber-100 drop-shadow-[0_0_15px_rgba(255,255,255,0.5)] font-cairo uppercase" style={{ direction: 'rtl' }}>
                         رمضان كريم
                     </p>
                 </div>
             </motion.div>
 
-            {/* Gentle Light Particles */}
-            <div className="absolute inset-0 preserve-3d">
+            {/* Gentle Light Particles - Hidden on mobile */}
+            <div className="absolute inset-0 preserve-3d hidden md:block">
                 {[...Array(15)].map((_, i) => (
                     <motion.div
                         key={i}
                         className="absolute w-1 h-1 bg-amber-300 rounded-full"
                         initial={{
-                            x: Math.random() * window.innerWidth,
-                            y: Math.random() * window.innerHeight,
+                            x: Math.random() * 1000,
+                            y: Math.random() * 800,
                             opacity: 0
                         }}
                         animate={{

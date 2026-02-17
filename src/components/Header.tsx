@@ -20,14 +20,14 @@ const Header = () => {
 
   return (
     <header className="sticky top-0 z-50 glass-effect border-b border-border/50">
-      <div className="container flex items-center justify-between h-20">
+      <div className="container flex items-center justify-between h-16 md:h-20">
         <Link to="/" className="group flex items-center gap-2">
           <div className="relative">
             <div className="absolute inset-0 bg-primary/20 blur-xl rounded-full scale-110 group-hover:scale-125 transition-transform duration-500" />
             <img
               src={logo}
               alt="Karma Store"
-              className="h-14 md:h-16 relative object-contain transition-all duration-500 group-hover:scale-105 group-hover:drop-shadow-[0_0_15px_rgba(var(--primary),0.4)]"
+              className="h-10 md:h-16 relative object-contain transition-all duration-500 group-hover:scale-105 group-hover:drop-shadow-[0_0_15px_rgba(var(--primary),0.4)]"
             />
           </div>
           <span className="text-xl font-black bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent hidden sm:block">

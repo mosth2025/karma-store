@@ -98,7 +98,7 @@ const Index = () => {
       <StepByStep />
 
       {/* Servers Section */}
-      <section id="servers" className="py-24">
+      <section id="servers" className="py-12 md:py-24">
         <div className="container">
           <div className="text-center mb-16">
             <motion.h2
