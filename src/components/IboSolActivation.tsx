@@ -61,6 +61,7 @@ const APP_CATEGORIES = [
             { id: "single:smarters", name: "SMARTERS PLAYER", color: "from-sky-500/10", img: "/apps-icons/smarters.png" },
             { id: "single:ora", name: "ORA PLAYER", color: "from-purple-600/10", img: "/apps-icons/ora.png" },
             { id: "single:hotplayer", name: "HOT PLAYER", color: "from-orange-600/10", img: "/apps-icons/hotplayer.svg" },
+            { id: "single:iboproapp", name: "IBO PRO APP", color: "from-blue-600/10", img: "https://iboproapp.com/m3u/logo-512.png" },
         ]
     }
 ];
