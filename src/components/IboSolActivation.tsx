@@ -99,15 +99,15 @@ const IboSolActivation = () => {
 
         if (code !== "EG") {
             // International Defaults (Equivalent to 200/350 EGP)
-            annual = 15;
-            lifetime = 25;
+            annual = 4;
+            lifetime = 7;
             currency = "$";
 
-            if (code === "SA") { currency = "ريال"; annual = 60; lifetime = 100; }
-            if (code === "AE") { currency = "درهم"; annual = 60; lifetime = 100; }
-            if (code === "JO") { currency = "دينار"; annual = 12; lifetime = 18; }
-            if (code === "KW") { currency = "دينار كويتي"; annual = 5; lifetime = 8; }
-            if (code === "QA") { currency = "ريال"; annual = 60; lifetime = 100; }
+            if (code === "SA") { currency = "ريال"; annual = 15; lifetime = 25; }
+            if (code === "AE") { currency = "درهم"; annual = 15; lifetime = 25; }
+            if (code === "JO") { currency = "دينار"; annual = 3; lifetime = 5; }
+            if (code === "KW") { currency = "دينار كويتي"; annual = 1.25; lifetime = 2.25; }
+            if (code === "QA") { currency = "ريال"; annual = 15; lifetime = 25; }
         }
 
         return {
