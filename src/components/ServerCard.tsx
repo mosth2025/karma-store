@@ -6,25 +6,26 @@ import { reportEvent } from "@/lib/reporter";
 
 interface ServerCardProps {
   name: string;
-  price: number;
+  price: number | string;
+  currency?: string;
   features: string[];
   popular?: boolean;
   index?: number;
 }
 
-const ServerCard = ({ name, price, features, popular, index = 0 }: ServerCardProps) => {
+const ServerCard = ({ name, price, currency = "جنيه", features, popular, index = 0 }: ServerCardProps) => {
   const handleOrder = () => {
     // Report event
     reportEvent({
       event: "order_click",
-      details: `User clicked order for server: ${name} (Price: ${price} EGP)`
+      details: `User clicked order for server: ${name} (Price: ${price} ${currency})`
     });
 
     const message = encodeURIComponent(
       `🚀 *طلب اشتراك وتفعيل - Karma Store*\n` +
       `----------------------------------\n` +
       `📌 *السيرفر:* ${name}\n` +
-      `💰 *السعر:* ${price} جنيه / سنة\n` +
+      `💰 *السعر:* ${price} ${currency} / سنة\n` +
       `📱 *نوع جهازي:* (أكتب هنا نوع جهازك: شاشة / أندرويد / آيفون)\n` +
       `----------------------------------\n` +
       `أرغب في تشغيل الباقة والتجربة أولاً، وسأقوم بالتحويل فور التأكد من التشغيل.`
@@ -65,7 +66,7 @@ const ServerCard = ({ name, price, features, popular, index = 0 }: ServerCardPro
           <span className="text-5xl font-black text-primary drop-shadow-[0_0_10px_rgba(var(--primary),0.3)]">
             {price}
           </span>
-          <span className="text-muted-foreground font-semibold">جنيه / سنة</span>
+          <span className="text-muted-foreground font-semibold">{currency} / سنة</span>
         </div>
 
         <ul className="space-y-4 mb-10">

@@ -6,6 +6,8 @@ import { Input } from "@/components/ui/input";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/components/ui/use-toast";
+import { useGeoLocation } from "@/hooks/useGeoLocation";
+import { reportEvent } from "@/lib/reporter";
 
 const APP_CATEGORIES = [
     {
@@ -84,6 +86,34 @@ const IboSolActivation = () => {
     const fileInputRef = useRef<HTMLInputElement>(null);
     const [isActivating, setIsActivating] = useState(false);
     const { toast } = useToast();
+    const { geoData } = useGeoLocation();
+
+    const getPriceData = () => {
+        const isEgypt = geoData?.country_code === "EG";
+
+        let annual = 140;
+        let lifetime = 250;
+        let currency = "جنيه";
+
+        if (!isEgypt && geoData) {
+            // Placeholder International prices for activation
+            // Usually activation alone is around 8-12$
+            annual = 10;
+            lifetime = 18;
+            currency = "$";
+
+            // Specific Gulf Adjustments
+            if (geoData.country_code === "SA") { currency = "ريال"; annual = 40; lifetime = 70; }
+            if (geoData.country_code === "AE") { currency = "درهم"; annual = 40; lifetime = 70; }
+        }
+
+        return {
+            price: isLifetime ? lifetime : annual,
+            currency
+        };
+    };
+
+    const { price: currentPrice, currency: currentCurrency } = getPriceData();
 
     const toggleApp = (appId: string) => {
         if (selectedApps.includes(appId)) {
@@ -198,13 +228,13 @@ const IboSolActivation = () => {
             return id;
         }).join(", ");
 
-        const duration = isLifetime ? "مدى الحياة (2 نقطة)" : "سنة واحدة (1 نقطة)";
-        const price = isLifetime ? "250 جنيه" : "140 جنيه";
+        const duration = isLifetime ? "مدى الحياة" : "سنة واحدة";
+        const finalPrice = `${currentPrice} ${currentCurrency}`;
 
         // Report event
         reportEvent({
             event: "activation_request",
-            details: `User requested VIP activation for MAC: ${macAddress}, Apps: ${appsNames}, Duration: ${duration}`
+            details: `User requested VIP activation for MAC: ${macAddress}, Apps: ${appsNames}, Duration: ${duration} (Price: ${finalPrice})`
         });
 
         const message = encodeURIComponent(
@@ -213,7 +243,7 @@ const IboSolActivation = () => {
             `🆔 *الماك أدريس:* \`${macAddress}\` \n` +
             `📌 *التطبيقات:* ${appsNames}\n` +
             `⏳ *المدة:* ${duration}\n` +
-            `💰 *السعر:* ${price}\n` +
+            `💰 *السعر:* ${finalPrice}\n` +
             `----------------------------------\n` +
             `لقد قمت باختيار التطبيقات ومراجعة البيانات، برجاء التفعيل فوراً.`
         );
@@ -286,8 +316,8 @@ const IboSolActivation = () => {
                                                     }`}
                                             >
                                                 <div className={`w-20 h-20 rounded-2xl mb-3 flex items-center justify-center overflow-hidden border border-white/20 ${app.name.toLowerCase().includes('smarters') || app.name.toLowerCase().includes('hot player')
-                                                        ? "bg-slate-900"
-                                                        : "bg-gray-100"
+                                                    ? "bg-slate-900"
+                                                    : "bg-gray-100"
                                                     } ${selectedApps.includes(app.id) ? "scale-110 shadow-lg" : ""}`}>
                                                     <AppIcon
                                                         src={app.img}
@@ -395,7 +425,7 @@ const IboSolActivation = () => {
                                     </div>
                                     <div className="flex justify-between items-center text-primary">
                                         <span className="font-bold text-sm">السعر:</span>
-                                        <span className="text-xl font-black">{isLifetime ? "250" : "140"} جنيه</span>
+                                        <span className="text-xl font-black">{currentPrice} {currentCurrency}</span>
                                     </div>
                                 </div>
 

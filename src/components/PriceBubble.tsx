@@ -1,10 +1,47 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Globe, X, Info } from "lucide-react";
+import { useGeoLocation } from "@/hooks/useGeoLocation";
 
 const PriceBubble = () => {
     const [isPopped, setIsPopped] = useState(false);
     const [isVisible, setIsVisible] = useState(true);
+    const { geoData } = useGeoLocation();
+
+    const getGreeting = () => {
+        if (!geoData) return "مرحباً بك في كارما استور 🚀";
+
+        const country = geoData.country_name;
+        const code = geoData.country_code;
+
+        const praise: Record<string, string> = {
+            "SA": "السعودية الحبيبة أهل الجود 🇸🇦",
+            "AE": "الإمارات الحبيبة دار زايد 🇦🇪",
+            "KW": "الكويت الغالية بلد الإنسانية 🇰🇼",
+            "QA": "قطر الشقيقة كعبة المضيوم QA",
+            "BH": "البحرين الطبيبة أهل الكرم 🇧🇭",
+            "OM": "سلطنة عمان الأصالة 🇴🇲",
+            "US": "أمريكا بلاد الحرية 🇺🇸",
+            "DE": "ألمانيا بلد الدقة والإتقان 🇩🇪",
+            "GB": "بريطانيا العريقة 🇬🇧",
+            "FR": "فرنسا بلد الجمال 🇫🇷",
+            "IT": "إيطاليا بلد الفن 🇮🇹",
+            "ES": "إسبانيا الممتعة 🇪🇸",
+            "TR": "تركيا الجميلة 🇹🇷",
+            "EG": "مصر أم الدنيا بنحبكم يا أهلنا 🇪🇬",
+            "LB": "لبنان الأرز والحب 🇱🇧",
+            "JO": "الأردن النشامى 🇯🇴",
+            "MA": "المغرب بلاد الأصالة والجمال 🇲🇦",
+            "DZ": "الجزائر بلد الأحرار 🇩🇿",
+            "TN": "تونس الخضراء 🇹🇳",
+            "LY": "ليبيا المختار أهل الشهامة 🇱🇾",
+            "SD": "السودان الطيبة والنخوة 🇸🇩",
+            "IQ": "العراق بلد الحضارة والكرم 🇮🇶",
+            "PS": "فلسطين الأبية فخر العرب 🇵🇸"
+        };
+
+        return `مرحباً بك أخي من ${praise[code] || country} ❤️`;
+    };
 
     const handlePop = () => {
         setIsPopped(true);
@@ -54,8 +91,8 @@ const PriceBubble = () => {
                                     <Info className="w-4 h-4 text-primary" />
                                 </div>
                                 <div className="space-y-1" style={{ direction: 'rtl' }}>
-                                    <p className="text-xs font-black text-white leading-tight">📍 الأسعار داخل مصر فقط</p>
-                                    <p className="text-[10px] text-muted-foreground leading-relaxed">إذا كنت خارج مصر، يرجى إبلاغ الدعم لتوضيح السعر وتفعيل الخدمة في دولتك.</p>
+                                    <p className="text-xs font-black text-white leading-tight">{getGreeting()}</p>
+                                    <p className="text-[10px] text-muted-foreground leading-relaxed">تظهر لك الآن الأسعار والعروض المخصصة لدولتك. استمتع بمشاهدة غير محدودة!</p>
                                     <p className="text-[9px] text-primary/80 font-bold mt-2 animate-bounce flex items-center gap-1 justify-end">
                                         اضغط لتفجير الفقاعة 💥
                                     </p>

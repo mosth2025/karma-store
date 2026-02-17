@@ -13,53 +13,12 @@ import DownloadCenter from "@/components/DownloadCenter";
 import ScrollToTop from "@/components/ScrollToTop";
 import IboSolActivation from "@/components/IboSolActivation";
 import { motion } from "framer-motion";
-
-const servers = [
-  {
-    name: "VIP Bundle",
-    price: 1200,
-    features: ["12 شهر اشتراك", "سيرفرين (2) مختلفين", "جودة 4K فائقة", "دعم فني VIP"],
-  },
-  {
-    name: "ELITE Triple",
-    price: 1600,
-    features: ["12 شهر اشتراك", "3 سيرفرات مختلفة", "أقصى استقرار ممكن", "أولوية التفعيل"],
-    popular: true,
-  },
-  {
-    name: "مارفل",
-    price: 450,
-    features: ["12 شهر اشتراك", "باقة مميزة", "دعم متعدد الأجهزة", "تحديث يومي"],
-  },
-  {
-    name: "هيدرا",
-    price: 450,
-    features: ["12 شهر اشتراك", "أفضل استقرار", "جميع الرياضات", "مكتبة أفلام"],
-  },
-  {
-    name: "نوفا",
-    price: 400,
-    features: ["12 شهر اشتراك", "استقرار عالي", "جميع الباقات", "دعم سريع"],
-  },
-  {
-    name: "إكس",
-    price: 425,
-    features: ["12 شهر اشتراك", "جودة 4K", "قنوات رياضية", "VOD متاح"],
-  },
-  {
-    name: "عرب ليونز",
-    price: 700,
-    features: ["12 شهر اشتراك", "باقة VIP", "جميع القنوات العالمية", "أولوية الدعم"],
-  },
-  {
-    name: "MH",
-    price: 350,
-    features: ["12 شهر اشتراك", "جودة عالية HD", "قنوات متنوعة", "تحديث مستمر"],
-  },
-];
+import { useGeoLocation } from "@/hooks/useGeoLocation";
+import { servers } from "@/data/prices";
 
 const Index = () => {
   const [showActivation, setShowActivation] = useState(true);
+  const { geoData } = useGeoLocation();
 
   useEffect(() => {
     document.title = "كارما استور | أفضل سيرفرات IPTV في مصر والشرق الأوسط";
@@ -87,6 +46,38 @@ const Index = () => {
       }
     }
   }, []);
+
+  const getPriceData = (server: any) => {
+    const isEgypt = geoData?.country_code === "EG";
+
+    if (isEgypt || !geoData) {
+      return { price: server.egyptPrice, currency: "جنيه" };
+    }
+
+    // Gulf Countries
+    const gulf: Record<string, { price: number, currency: string }> = {
+      "SA": { price: server.intlPrice * 3.75, currency: "ريال" }, // Approximate conversion or user will update
+      "AE": { price: server.intlPrice * 3.67, currency: "درهم" },
+      "KW": { price: server.intlPrice * 0.31, currency: "دينار" },
+      "QA": { price: server.intlPrice * 3.64, currency: "ريال" },
+    };
+
+    if (gulf[geoData.country_code]) {
+      return {
+        price: Math.round(gulf[geoData.country_code].price),
+        currency: gulf[geoData.country_code].currency
+      };
+    }
+
+    // Europe
+    const europe = ["FR", "DE", "IT", "ES", "NL", "BE", "AT", "GR"];
+    if (europe.includes(geoData.country_code)) {
+      return { price: server.intlPrice, currency: "€" };
+    }
+
+    // Default International
+    return { price: server.intlPrice, currency: "$" };
+  };
 
   return (
     <div className="min-h-screen bg-background font-cairo overflow-x-hidden">
@@ -122,9 +113,18 @@ const Index = () => {
           </div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {servers.map((server, index) => (
-              <ServerCard key={server.name} {...server} index={index} />
-            ))}
+            {servers.map((server, index) => {
+              const { price, currency } = getPriceData(server);
+              return (
+                <ServerCard
+                  key={server.name}
+                  {...server}
+                  price={price}
+                  currency={currency}
+                  index={index}
+                />
+              );
+            })}
           </div>
         </div>
       </section>
