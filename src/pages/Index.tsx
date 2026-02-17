@@ -48,35 +48,24 @@ const Index = () => {
   }, []);
 
   const getPriceData = (server: any) => {
-    const isEgypt = geoData?.country_code === "EG";
+    const code = geoData?.country_code || "EG";
+    const p = server.prices;
 
-    if (isEgypt || !geoData) {
-      return { price: server.egyptPrice, currency: "جنيه" };
-    }
-
-    // Gulf Countries
-    const gulf: Record<string, { price: number, currency: string }> = {
-      "SA": { price: server.intlPrice * 3.75, currency: "ريال" }, // Approximate conversion or user will update
-      "AE": { price: server.intlPrice * 3.67, currency: "درهم" },
-      "KW": { price: server.intlPrice * 0.31, currency: "دينار" },
-      "QA": { price: server.intlPrice * 3.64, currency: "ريال" },
-    };
-
-    if (gulf[geoData.country_code]) {
-      return {
-        price: Math.round(gulf[geoData.country_code].price),
-        currency: gulf[geoData.country_code].currency
-      };
-    }
+    if (code === "EG") return { price: p.EG, currency: "جنيه" };
+    if (code === "SA") return { price: p.SA, currency: "ريال" };
+    if (code === "AE") return { price: p.AE, currency: "درهم" };
+    if (code === "JO") return { price: p.JO, currency: "دينار" };
+    if (code === "KW") return { price: p.KW, currency: "دينار كويتي" };
+    if (code === "QA") return { price: p.SA, currency: "ريال" };
 
     // Europe
     const europe = ["FR", "DE", "IT", "ES", "NL", "BE", "AT", "GR"];
-    if (europe.includes(geoData.country_code)) {
-      return { price: server.intlPrice, currency: "€" };
+    if (europe.includes(code)) {
+      return { price: p.US, currency: "€" };
     }
 
     // Default International
-    return { price: server.intlPrice, currency: "$" };
+    return { price: p.US, currency: "$" };
   };
 
   return (

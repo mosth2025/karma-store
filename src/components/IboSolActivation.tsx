@@ -89,22 +89,23 @@ const IboSolActivation = () => {
     const { geoData } = useGeoLocation();
 
     const getPriceData = () => {
-        const isEgypt = geoData?.country_code === "EG";
+        const code = geoData?.country_code || "EG";
 
         let annual = 140;
         let lifetime = 250;
         let currency = "جنيه";
 
-        if (!isEgypt && geoData) {
-            // Placeholder International prices for activation
-            // Usually activation alone is around 8-12$
+        if (code !== "EG") {
+            // International Defaults
             annual = 10;
             lifetime = 18;
             currency = "$";
 
-            // Specific Gulf Adjustments
-            if (geoData.country_code === "SA") { currency = "ريال"; annual = 40; lifetime = 70; }
-            if (geoData.country_code === "AE") { currency = "درهم"; annual = 40; lifetime = 70; }
+            if (code === "SA") { currency = "ريال"; annual = 40; lifetime = 75; }
+            if (code === "AE") { currency = "درهم"; annual = 40; lifetime = 75; }
+            if (code === "JO") { currency = "دينار"; annual = 8; lifetime = 14; }
+            if (code === "KW") { currency = "دينار كويتي"; annual = 3; lifetime = 6; }
+            if (code === "QA") { currency = "ريال"; annual = 40; lifetime = 75; }
         }
 
         return {
