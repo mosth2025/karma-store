@@ -4,9 +4,9 @@ import { Moon, Star } from "lucide-react";
 const RamadanDecorations = () => {
     return (
         <div className="fixed inset-0 pointer-events-none z-[60] overflow-hidden">
-            {/* Top Hanging Zina (Decorations) - Hidden on mobile for less clutter */}
-            <div className="absolute top-0 left-0 w-full hidden md:flex justify-around items-start opacity-70">
-                {[...Array(8)].map((_, i) => (
+            {/* Top Hanging Zina (Decorations) - Small on mobile */}
+            <div className="absolute top-0 left-0 w-full flex justify-around items-start opacity-70">
+                {[...Array(6)].map((_, i) => (
                     <motion.div
                         key={i}
                         initial={{ y: -20, opacity: 0 }}
@@ -14,7 +14,7 @@ const RamadanDecorations = () => {
                         transition={{ delay: i * 0.1, duration: 1 }}
                         className="flex flex-col items-center"
                     >
-                        <div className="w-px h-24 bg-gradient-to-b from-transparent via-amber-500/40 to-amber-500" />
+                        <div className="w-px h-12 md:h-24 bg-gradient-to-b from-transparent via-amber-500/40 to-amber-500" />
                         <motion.div
                             animate={{ scale: [1, 1.2, 1], opacity: [0.5, 1, 0.5] }}
                             transition={{ duration: 2, repeat: Infinity, delay: i * 0.3 }}
@@ -95,8 +95,8 @@ const RamadanDecorations = () => {
                     <Moon className="w-8 h-8 md:w-24 md:h-24 text-amber-100 fill-amber-100/30 -rotate-12 drop-shadow-[0_0_10px_rgba(254,243,199,0.8)]" />
                 </div>
 
-                <div className="text-center hidden md:block">
-                    <p className="text-[10px] md:text-2xl font-black text-amber-100 drop-shadow-[0_0_15px_rgba(255,255,255,0.5)] font-cairo uppercase" style={{ direction: 'rtl' }}>
+                <div className="text-center">
+                    <p className="text-[8px] md:text-2xl font-black text-amber-100 drop-shadow-[0_0_15px_rgba(255,255,255,0.5)] font-cairo uppercase" style={{ direction: 'rtl' }}>
                         رمضان كريم
                     </p>
                 </div>
