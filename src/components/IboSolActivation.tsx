@@ -17,24 +17,24 @@ const APP_CATEGORIES = [
         type: "bundle",
         note: "يمكنك اختيار حتى 4 تطبيقات وتفعيلهم بنفس السعر",
         apps: [
-            { id: "ibopro", name: "IBOPLAYER + IBOAPPS", color: "from-red-600/10", img: "/apps-icons/ibopro.png" },
-            { id: "bobplayer", name: "BOBPLAYER", color: "from-blue-500/10", img: "/apps-icons/bobplayer.png" },
-            { id: "ibosolplayer", name: "IBOSOLPlayer", color: "from-emerald-500/10", img: "/apps-icons/ibosolplayer.png" },
-            { id: "hushplay", name: "HUSHPLAY", color: "from-green-500/10", img: "/apps-icons/ibo_special.png" },
-            { id: "bobpro", name: "BOBPRO", color: "from-red-600/10", img: "/apps-icons/bobpro.png" },
-            { id: "bobpremium", name: "BOBPREMIUM", color: "from-green-400/10", img: "/apps-icons/bobpremium.png" },
-            { id: "king4kplayer", name: "KING4KPLAYER", color: "from-amber-600/10", img: "/apps-icons/bob_special.png" },
-            { id: "flixnet", name: "FLIXNET", color: "from-green-600/10", img: "/apps-icons/flixnet.png" },
-            { id: "abeplayer", name: "ABEPlayerTV", color: "from-yellow-400/10", img: "/apps-icons/abeplayer.png" },
-            { id: "macplayer", name: "MACPLAYER", color: "from-red-500/10", img: "/apps-icons/macplayer.png" },
-            { id: "virginia", name: "VIRGINIA", color: "from-purple-500/10", img: "/apps-icons/virginia.png" },
-            { id: "allplayer", name: "AllPlayer", color: "from-orange-500/10", img: "/apps-icons/allplayer.png" },
-            { id: "duplex", name: "DUPLEX", color: "from-cyan-500/10", img: "/apps-icons/duplex.png" },
-            { id: "ktnplayer", name: "KTNPLAYER", color: "from-blue-400/10", img: "/apps-icons/ktnplayer.png" },
-            { id: "familyplayer", name: "FAMILYPLAYER", color: "from-red-600/10", img: "/apps-icons/familyplayer.png" },
-            { id: "ibossplayer", name: "IBOSSPLAYER", color: "from-rose-500/10", img: "/apps-icons/ibossplayer.png" },
-            { id: "ibostb", name: "IBOSTB", color: "from-blue-800/10", img: "/apps-icons/ibostb.png" },
-            { id: "iboxxplayer", name: "IBOXX IPTV", color: "from-orange-600/10", img: "/apps-icons/iboxxplayer.png" },
+            { id: "ibosol:ibopro", name: "IBOPLAYER + IBOAPPS", color: "from-red-600/10", img: "/apps-icons/ibopro.png" },
+            { id: "ibosol:bobplayer", name: "BOBPLAYER", color: "from-blue-500/10", img: "/apps-icons/bobplayer.png" },
+            { id: "ibosol:ibosolplayer", name: "IBOSOLPlayer", color: "from-emerald-500/10", img: "/apps-icons/ibosolplayer.png" },
+            { id: "ibosol:hushplay", name: "HUSHPLAY", color: "from-green-500/10", img: "/apps-icons/ibo_special.png" },
+            { id: "ibosol:bobpro", name: "BOBPRO", color: "from-red-600/10", img: "/apps-icons/bobpro.png" },
+            { id: "ibosol:bobpremium", name: "BOBPREMIUM", color: "from-green-400/10", img: "/apps-icons/bobpremium.png" },
+            { id: "ibosol:king4kplayer", name: "KING4KPLAYER", color: "from-amber-600/10", img: "/apps-icons/bob_special.png" },
+            { id: "ibosol:flixnet", name: "FLIXNET", color: "from-green-600/10", img: "/apps-icons/flixnet.png" },
+            { id: "ibosol:abeplayer", name: "ABEPlayerTV", color: "from-yellow-400/10", img: "/apps-icons/abeplayer.png" },
+            { id: "ibosol:macplayer", name: "MACPLAYER", color: "from-red-500/10", img: "/apps-icons/macplayer.png" },
+            { id: "ibosol:virginia", name: "VIRGINIA", color: "from-purple-500/10", img: "/apps-icons/virginia.png" },
+            { id: "ibosol:allplayer", name: "AllPlayer", color: "from-orange-500/10", img: "/apps-icons/allplayer.png" },
+            { id: "ibosol:duplex", name: "DUPLEX", color: "from-cyan-500/10", img: "/apps-icons/duplex.png" },
+            { id: "ibosol:ktnplayer", name: "KTNPLAYER", color: "from-blue-400/10", img: "/apps-icons/ktnplayer.png" },
+            { id: "ibosol:familyplayer", name: "FAMILYPLAYER", color: "from-red-600/10", img: "/apps-icons/familyplayer.png" },
+            { id: "ibosol:ibossplayer", name: "IBOSSPLAYER", color: "from-rose-500/10", img: "/apps-icons/ibossplayer.png" },
+            { id: "ibosol:ibostb", name: "IBOSTB", color: "from-blue-800/10", img: "/apps-icons/ibostb.png" },
+            { id: "ibosol:iboxxplayer", name: "IBOXX IPTV", color: "from-orange-600/10", img: "/apps-icons/iboxxplayer.png" },
         ]
     },
     {
@@ -43,8 +43,11 @@ const APP_CATEGORIES = [
         type: "bundle",
         note: "يمكنك اختيار حتى 4 تطبيقات من هذه العائلة",
         apps: [
-            { id: "cr7", name: "CR7 PLAYER", color: "from-yellow-600/10", img: "/apps-icons/cr7.png" },
-            { id: "messi", name: "MESSI PLAYER", color: "from-blue-600/10", img: "/apps-icons/messi.png" },
+            { id: "cr7_family:iboxplayer", name: "IBO XPlayer", color: "from-orange-600/10", img: "/apps-icons/iboxxplayer.png" },
+            { id: "cr7_family:crplayer", name: "CR Player", color: "from-green-600/10", img: "/apps-icons/cr7.png" },
+            { id: "cr7_family:ibovpn", name: "IBO VPN PLAYER", color: "from-red-600/10", img: "/apps-icons/ibovpn.png" },
+            { id: "cr7_family:messitv", name: "MessiTV", color: "from-blue-600/10", img: "/apps-icons/messi.png" },
+            { id: "cr7_family:smartersvpn", name: "Smarters VPN Player", color: "from-blue-500/10", img: "/apps-icons/smartersvpn.png" },
         ]
     },
     {
@@ -53,13 +56,13 @@ const APP_CATEGORIES = [
         type: "single",
         note: "هذه التطبيقات تتطلب تفعيل منفصل لكل تطبيق",
         apps: [
-            { id: "smartone", name: "SMARTONE PRO", color: "from-blue-900/10", img: "/apps-icons/smartone.png" },
-            { id: "smartoneiptv", name: "SMARTONE IPTV", color: "from-blue-600/10", img: "/apps-icons/smartoneiptv.webp" },
-            { id: "smarters", name: "SMARTERS PLAYER", color: "from-sky-500/10", img: "/apps-icons/smarters.png" },
-            { id: "ora", name: "ORA PLAYER", color: "from-purple-600/10", img: "/apps-icons/ora.png" },
-            { id: "hotplayer", name: "HOT PLAYER", color: "from-orange-600/10", img: "/apps-icons/hotplayer.svg" },
-            { id: "smartersvpn", name: "SMARTERS VPN PLAYER", color: "from-blue-500/10", img: "/apps-icons/smartersvpn.png" },
-            { id: "ibovpn", name: "IBO VPN PLAYER", color: "from-red-600/10", img: "/apps-icons/ibovpn.png" },
+            { id: "single:smartone", name: "SMARTONE PRO", color: "from-blue-900/10", img: "/apps-icons/smartone.png" },
+            { id: "single:smartoneiptv", name: "SMARTONE IPTV", color: "from-blue-600/10", img: "/apps-icons/smartoneiptv.webp" },
+            { id: "single:smarters", name: "SMARTERS PLAYER", color: "from-sky-500/10", img: "/apps-icons/smarters.png" },
+            { id: "single:ora", name: "ORA PLAYER", color: "from-purple-600/10", img: "/apps-icons/ora.png" },
+            { id: "single:hotplayer", name: "HOT PLAYER", color: "from-orange-600/10", img: "/apps-icons/hotplayer.svg" },
+            { id: "single:smartersvpn", name: "SMARTERS VPN PLAYER", color: "from-blue-500/10", img: "/apps-icons/smartersvpn.png" },
+            { id: "single:ibovpn", name: "IBO VPN PLAYER", color: "from-red-600/10", img: "/apps-icons/ibovpn.png" },
         ]
     }
 ];
@@ -129,12 +132,11 @@ const IboSolActivation = () => {
         if (selectedApps.includes(appId)) {
             setSelectedApps(selectedApps.filter((id) => id !== appId));
         } else {
-            // Check if we already have apps from a different group
-            const currentCategoryId = APP_CATEGORIES.find(cat =>
-                cat.apps.some(a => a.id === selectedApps[0])
-            )?.id;
+            // Check if we already have apps from a different group using prefix mapping
+            const currentFamily = selectedApps[0]?.split(':')[0];
+            const targetFamily = appId.split(':')[0];
 
-            if (selectedApps.length > 0 && currentCategoryId !== category.id) {
+            if (selectedApps.length > 0 && currentFamily !== targetFamily) {
                 // Switching categories - clear previous and switch
                 setSelectedApps([appId]);
                 toast({
@@ -270,12 +272,11 @@ const IboSolActivation = () => {
 
         // Preparation for WhatsApp
         const appsNames = selectedApps.map(id => {
-            // Flatten categories to find the app
             for (const cat of APP_CATEGORIES) {
                 const app = cat.apps.find(a => a.id === id);
                 if (app) return app.name;
             }
-            return id;
+            return id.split(':').pop() || id;
         }).join(", ");
 
         const duration = isLifetime ? "مدى الحياة" : "سنة واحدة";
