@@ -25,58 +25,56 @@ const RamadanDecorations = () => {
                 ))}
             </div>
 
-            {/* Floating Premium Fanous - Bottom Left */}
+            {/* Floating Minimalist Lantern - Bottom Left */}
             <motion.div
                 drag
                 dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
-                className="absolute bottom-10 left-4 md:bottom-20 md:left-20 pointer-events-auto cursor-grab active:cursor-grabbing block scale-[0.35] md:scale-100 origin-bottom-left"
+                className="absolute bottom-10 left-6 md:bottom-20 md:left-20 pointer-events-auto cursor-grab active:cursor-grabbing"
                 animate={{
-                    y: [0, -20, 0],
-                    rotate: [-3, 3, -3]
+                    y: [0, -15, 0],
+                    rotate: [-5, 5, -5]
                 }}
                 transition={{
-                    duration: 5,
+                    duration: 4,
                     repeat: Infinity,
                     ease: "easeInOut"
                 }}
             >
-                <div className="flex flex-col items-center gap-4">
+                <div className="flex flex-col items-center gap-2">
                     <div className="relative group">
-                        {/* Intense Glow Effect */}
-                        <div className="absolute inset-0 bg-amber-500/30 blur-[60px] rounded-full scale-150 animate-pulse" />
+                        {/* Glow Effect */}
+                        <div className="absolute inset-0 bg-amber-500/20 blur-[20px] md:blur-[60px] rounded-full scale-150 animate-pulse" />
 
-                        {/* SVG Fanous */}
-                        <svg width="80" height="120" viewBox="0 0 80 120" fill="none" xmlns="http://www.w3.org/2000/svg" className="drop-shadow-[0_0_20px_rgba(251,191,36,0.7)]">
-                            <circle cx="40" cy="10" r="4" stroke="#D97706" strokeWidth="2" />
-                            <path d="M20 30L40 15L60 30H20Z" fill="#B45309" stroke="#FBBF24" strokeWidth="1.5" />
-                            <path d="M15 30H65L70 45L65 90H15L10 45L15 30Z" fill="url(#fanous_gradient)" stroke="#FBBF24" strokeWidth="2" />
-                            <rect x="35" y="40" width="10" height="40" rx="2" fill="#78350F" opacity="0.6" />
-                            <path d="M25 45L30 80H20L15 45H25Z" fill="#78350F" opacity="0.4" />
-                            <path d="M55 45L50 80H60L65 45H55Z" fill="#78350F" opacity="0.4" />
-                            <path d="M20 90H60L65 105H15L20 90Z" fill="#B45309" stroke="#FBBF24" strokeWidth="1.5" />
-                            <rect x="25" y="105" width="30" height="10" fill="#78350F" />
+                        {/* Minimalist Lantern SVG */}
+                        <svg
+                            width="40" height="60" viewBox="0 0 40 60"
+                            className="w-8 h-12 md:w-20 md:h-30 drop-shadow-[0_0_10px_rgba(251,191,36,0.5)]"
+                        >
+                            <path d="M10 15L20 5L30 15H10Z" fill="#B45309" stroke="#FBBF24" strokeWidth="1" />
+                            <path d="M8 15H32L35 25L32 50H8L5 25L8 15Z" fill="url(#mini_fanous_gradient)" stroke="#FBBF24" strokeWidth="1.5" />
+                            <path d="M12 50H28L30 58H10L12 50Z" fill="#B45309" stroke="#FBBF24" strokeWidth="1" />
                             <defs>
-                                <linearGradient id="fanous_gradient" x1="40" y1="30" x2="40" y2="90" gradientUnits="userSpaceOnUse">
+                                <linearGradient id="mini_fanous_gradient" x1="20" y1="15" x2="20" y2="50" gradientUnits="userSpaceOnUse">
                                     <stop stopColor="#FBBF24" />
                                     <stop offset="1" stopColor="#D97706" />
                                 </linearGradient>
                             </defs>
                             <motion.circle
-                                cx="40" cy="60" r="10" fill="white"
-                                animate={{ opacity: [0.3, 0.9, 0.3], scale: [0.8, 1.3, 0.8] }}
+                                cx="20" cy="32" r="4" fill="white" opacity="0.8"
+                                animate={{ opacity: [0.4, 1, 0.4], scale: [0.8, 1.2, 0.8] }}
                                 transition={{ duration: 2, repeat: Infinity }}
                             />
                         </svg>
                     </div>
 
-                    {/* Greeting Text - Positioned relatively to Fanous */}
-                    <div className="text-center whitespace-nowrap">
+                    {/* Greeting Text - Hidden on mobile, shown on desktop */}
+                    <div className="text-center whitespace-nowrap hidden md:block">
                         <motion.p
-                            className="text-2xl md:text-xl font-black text-amber-400 drop-shadow-[0_0_12px_rgba(251,191,36,0.9)] font-cairo"
+                            className="text-xl font-black text-amber-400 drop-shadow-[0_0_12px_rgba(251,191,36,0.9)] font-cairo"
                             style={{ direction: 'rtl' }}
                         >
                             كل عام وأنتم بخير <br />
-                            <span className="text-xl md:text-base text-amber-200/90 italic">رمضان كريم</span>
+                            <span className="text-base text-amber-200/90 italic">رمضان كريم</span>
                         </motion.p>
                     </div>
                 </div>
