@@ -15,7 +15,7 @@ export interface ServerData {
 export const servers: ServerData[] = [
     {
         name: "هيدرا",
-        prices: { EG: 450, SA: 120, AE: 120, JO: 25, KW: 12, US: 35 },
+        prices: { EG: 600, SA: 120, AE: 120, JO: 25, KW: 12, US: 35 },
         features: ["12 شهر + 3 شهور هدية", "أفضل جودة - ثبات عالي", "قنوات رياضية وVOD", "دعم فني 24/7"],
         popular: true,
     },
