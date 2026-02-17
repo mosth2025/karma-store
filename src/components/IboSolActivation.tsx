@@ -149,38 +149,32 @@ const IboSolActivation = () => {
 
             console.log("OCR Raw Text:", text);
 
-            // 1. Extract Site/URL (Ultra Robust fuzzy matching)
-            const textLow = text.toLowerCase();
-            const textClean = textLow.replace(/[^a-z0-9]/g, ''); // Clear all non-alphanumeric chars for deep matching
-
-            if (textLow.includes("smarter") || textClean.includes("smarterspro") || textClean.includes("smtspro")) {
-                setUploadSite("smartersproplayer.net");
-            } else if (textLow.includes("ibo") || textClean.includes("ibopro")) {
-                setUploadSite("iboplayer.com");
-            } else if (textLow.includes("bob") || textClean.includes("bobpro")) {
-                setUploadSite("bobplayer.com");
+            let detectedSite = "";
+            if (textLow.includes("smarter") || textClean.includes("smarterspro")) {
+                detectedSite = "smartersproplayer.net";
+            } else if (textLow.includes("ibo")) {
+                detectedSite = "iboplayer.com";
+            } else if (textLow.includes("bob")) {
+                detectedSite = "bobplayer.com";
             } else if (textLow.includes("smartone")) {
-                setUploadSite("smartone-iptv.com");
-            } else if (textLow.includes("hush")) {
-                setUploadSite("hushplay.app");
+                detectedSite = "smartone-iptv.com";
             } else {
-                // Fallback: Extract any domain looking string
                 const domainRegex = /([a-z0-9-]+\.(?:net|com|org|app|store|info|tv|xyz))/gi;
                 const matches = textLow.match(domainRegex);
-                if (matches && matches.length > 0) {
-                    setUploadSite(matches[0]);
-                }
+                if (matches && matches.length > 0) detectedSite = matches[0];
             }
+            if (detectedSite) setUploadSite(detectedSite);
 
-            // 2. Extract MAC preserving case
-            const strictRegex = /([0-9a-fA-F]{2}[:-]){5}([0-9a-fA-F]{2})/g;
-            const strictMatches = text.match(strictRegex);
+            // 2. Extract MAC with flexible separators (preserving case)
+            const flexMacRegex = /([0-9a-fA-F]{2}[:;.-]){5}([0-9a-fA-F]{2})/g;
+            const macMatches = text.match(flexMacRegex);
 
-            if (strictMatches && strictMatches.length > 0) {
-                setMacAddress(strictMatches[0]);
+            if (macMatches && macMatches.length > 0) {
+                const cleanMac = macMatches[0].replace(/;/g, ':'); // Normalize common OCR error ; to :
+                setMacAddress(cleanMac);
                 toast({
-                    title: "✅ تم استخراج الماك!",
-                    description: `الماك: ${strictMatches[0]} ${urlMatch ? "\nالموقع: " + urlMatch[0] : ""}`,
+                    title: "✅ تم استخراج البيانات!",
+                    description: `الماك: ${cleanMac}${detectedSite ? "\nالموقع: " + detectedSite : ""}`,
                 });
             } else {
                 // Strategy 2: Smart cleaning for misreads (Only if strict fails)
