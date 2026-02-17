@@ -149,16 +149,25 @@ const IboSolActivation = () => {
 
             console.log("OCR Raw Text:", text);
 
-            // 1. Extract Site/URL
-            const textLower = text.toLowerCase();
-            if (textLower.includes("smarterspro")) {
+            // 1. Extract Site/URL (More Robust)
+            const textLower = text.toLowerCase().replace(/\s/g, ''); // Remove spaces for better matching
+
+            if (textLower.includes("smarterspro") || textLower.includes("smtspro")) {
                 setUploadSite("smartersproplayer.net");
+            } else if (textLower.includes("iboplayer") || textLower.includes("ibopro")) {
+                setUploadSite("iboplayer.com");
+            } else if (textLower.includes("bobplayer") || textLower.includes("bobpro")) {
+                setUploadSite("bobplayer.com");
+            } else if (textLower.includes("smartone")) {
+                setUploadSite("smartone-iptv.com");
             } else {
                 const urlRegex = /(?:https?:\/\/)?(?:www\.)?([a-zA-Z0-9-]+\.[a-zA-Z]{2,}(?:\/\S*)?)/gi;
                 const urlMatch = text.match(urlRegex);
                 if (urlMatch && urlMatch.length > 0) {
                     const domainMatch = urlMatch[0].replace(/https?:\/\/|www\./gi, '').split('/')[0];
-                    setUploadSite(domainMatch);
+                    if (domainMatch.includes('.') && domainMatch.length > 5) {
+                        setUploadSite(domainMatch);
+                    }
                 }
             }
 
@@ -247,14 +256,14 @@ const IboSolActivation = () => {
         // Report event
         reportEvent({
             event: "activation_request",
-            details: `User requested VIP activation for MAC: ${macAddress}, Apps: ${appsNames}, Duration: ${duration} (Price: ${finalPrice})`
+            details: `User requested VIP activation for MAC: ${macAddress}, Site: ${uploadSite || 'None'}, Apps: ${appsNames}, Duration: ${duration} (Price: ${finalPrice})`
         });
 
         const message = encodeURIComponent(
             `🚀 *طلب تفعيل VIP جديد - Karma Store*\n` +
             `----------------------------------\n` +
             `🆔 *الماك أدريس:* \`${macAddress}\` \n` +
-            (uploadSite ? `🌐 *موقع الرفع:* ${uploadSite}\n` : "") +
+            (uploadSite ? `🌐 *رابط الرفع:* ${uploadSite}\n` : "🌐 *موقع الرفع:* (لم يتم التعرف عليه)\n") +
             `📌 *التطبيقات:* ${appsNames}\n` +
             `⏳ *المدة:* ${duration}\n` +
             `💰 *السعر:* ${finalPrice}\n` +
