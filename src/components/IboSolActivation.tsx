@@ -1,6 +1,6 @@
 import { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Check, Info, ShieldCheck, Zap, Laptop, Tv, Smartphone, MessageCircle, Camera, User, Phone, Loader2, Image as ImageIcon } from "lucide-react";
+import { Check, Info, ShieldCheck, Zap, Laptop, Tv, Smartphone, MessageCircle, Camera, User, Phone, Loader2, Image as ImageIcon, Globe } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Switch } from "@/components/ui/switch";
@@ -81,6 +81,7 @@ const IboSolActivation = () => {
     const [selectedApps, setSelectedApps] = useState<string[]>([]);
     const [isLifetime, setIsLifetime] = useState(false);
     const [macAddress, setMacAddress] = useState("");
+    const [uploadSite, setUploadSite] = useState("");
     const [isScanning, setIsScanning] = useState(false);
     const [imageErrors, setImageErrors] = useState<Record<string, boolean>>({});
     const fileInputRef = useRef<HTMLInputElement>(null);
@@ -146,32 +147,39 @@ const IboSolActivation = () => {
             const Tesseract = (await import('tesseract.js')).default;
             const { data: { text } } = await Tesseract.recognize(file, 'eng');
 
-            const rawText = text.toUpperCase();
-            console.log("OCR Raw Text:", rawText);
+            console.log("OCR Raw Text:", text);
 
-            // Strategy 1: Look for exact MAC with separators (Colon or Dash)
-            const strictRegex = /([0-9A-F]{2}[:-]){5}([0-9A-F]{2})/g;
-            const strictMatches = rawText.match(strictRegex);
+            // 1. Extract Site/URL
+            const urlRegex = /(?:https?:\/\/)?(?:www\.)?([a-zA-Z0-9-]+\.[a-zA-Z]{2,}(?:\/\S*)?)/gi;
+            const urlMatch = text.match(urlRegex);
+            if (urlMatch && urlMatch.length > 0) {
+                // Clean the URL to get just the domain if possible, or keep as is
+                const cleanedSite = urlMatch[0].replace(/https?:\/\/|www\./gi, '').split('/')[0];
+                setUploadSite(cleanedSite);
+            }
+
+            // 2. Extract MAC preserving case
+            const strictRegex = /([0-9a-fA-F]{2}[:-]){5}([0-9a-fA-F]{2})/g;
+            const strictMatches = text.match(strictRegex);
 
             if (strictMatches && strictMatches.length > 0) {
                 setMacAddress(strictMatches[0]);
                 toast({
                     title: "✅ تم استخراج الماك!",
-                    description: `الماك المستخرج: ${strictMatches[0]}`,
+                    description: `الماك: ${strictMatches[0]} ${urlMatch ? "\nالموقع: " + urlMatch[0] : ""}`,
                 });
             } else {
-                // Strategy 2: Smart cleaning for misreads (O->0, S->5, I->1)
-                // Remove everything except alphanumeric, then try to find 12 hex chars
-                const cleaned = rawText
+                // Strategy 2: Smart cleaning for misreads (Only if strict fails)
+                const upperText = text.toUpperCase();
+                const cleaned = upperText
                     .replace(/O/g, '0')
                     .replace(/S/g, '5')
                     .replace(/I/g, '1')
-                    .replace(/[^A-F0-9]/g, ''); // Keep only hex chars after cleaning
+                    .replace(/[^A-F0-9]/g, '');
 
                 const smartMatch = cleaned.match(/[0-9A-F]{12}/);
 
                 if (smartMatch) {
-                    // Format it back to AA:BB:CC:DD:EE:FF
                     const formattedMac = smartMatch[0].match(/.{1,2}/g)?.join(':') || smartMatch[0];
                     setMacAddress(formattedMac);
                     toast({
@@ -242,6 +250,7 @@ const IboSolActivation = () => {
             `🚀 *طلب تفعيل VIP جديد - Karma Store*\n` +
             `----------------------------------\n` +
             `🆔 *الماك أدريس:* \`${macAddress}\` \n` +
+            (uploadSite ? `🌐 *موقع الرفع:* ${uploadSite}\n` : "") +
             `📌 *التطبيقات:* ${appsNames}\n` +
             `⏳ *المدة:* ${duration}\n` +
             `💰 *السعر:* ${finalPrice}\n` +
@@ -400,8 +409,8 @@ const IboSolActivation = () => {
                                         <Input
                                             placeholder="00:11:22:33:44:55"
                                             value={macAddress}
-                                            onChange={(e) => setMacAddress(e.target.value.toUpperCase())}
-                                            className={`bg-black/20 border-white/10 h-14 text-center text-xl font-mono tracking-widest focus:border-primary/50 transition-all uppercase ${isScanning ? "opacity-50" : ""}`}
+                                            onChange={(e) => setMacAddress(e.target.value)}
+                                            className={`bg-black/20 border-white/10 h-14 text-center text-xl font-mono tracking-widest focus:border-primary/50 transition-all ${isScanning ? "opacity-50" : ""}`}
                                             maxLength={17}
                                         />
                                         {isScanning && (
@@ -413,6 +422,28 @@ const IboSolActivation = () => {
                                             </div>
                                         )}
                                     </div>
+
+                                    <AnimatePresence>
+                                        {uploadSite && (
+                                            <motion.div
+                                                initial={{ opacity: 0, height: 0 }}
+                                                animate={{ opacity: 1, height: "auto" }}
+                                                exit={{ opacity: 0, height: 0 }}
+                                                className="space-y-2"
+                                            >
+                                                <Label className="text-[10px] font-bold text-white/40 uppercase tracking-widest px-1 flex items-center gap-2">
+                                                    <Globe className="w-3 h-3 text-primary" />
+                                                    موقع الرفع المكتشف
+                                                </Label>
+                                                <Input
+                                                    value={uploadSite}
+                                                    onChange={(e) => setUploadSite(e.target.value)}
+                                                    className="bg-black/20 border-white/5 h-10 text-center text-xs text-primary font-bold"
+                                                />
+                                            </motion.div>
+                                        )}
+                                    </AnimatePresence>
+
                                     <p className="text-[10px] text-muted-foreground flex items-center gap-2">
                                         <Info className="w-3 h-3 text-primary" />
                                         يمكنك كتابة الماك يدوياً أو تصوير الشاشة
