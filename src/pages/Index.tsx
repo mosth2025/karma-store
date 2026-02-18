@@ -12,6 +12,7 @@ import ExpertRecommendation from "@/components/ExpertRecommendation";
 import DownloadCenter from "@/components/DownloadCenter";
 import ScrollToTop from "@/components/ScrollToTop";
 import IboSolActivation from "@/components/IboSolActivation";
+import PriceBubble from "@/components/PriceBubble";
 import { motion, AnimatePresence } from "framer-motion";
 import { useGeoLocation } from "@/hooks/useGeoLocation";
 import { servers } from "@/data/prices";
@@ -22,10 +23,6 @@ const Index = () => {
   const [showDownloadsSection, setShowDownloadsSection] = useState(false);
   const [activeSection, setActiveSection] = useState<string | null>(null);
   const [isHeaderVisible, setIsHeaderVisible] = useState(true);
-  const [lastClickTime, setLastClickTime] = useState<Record<string, number>>({
-    activation: 0,
-    downloads: 0
-  });
 
   const { geoData } = useGeoLocation();
 
@@ -61,13 +58,9 @@ const Index = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const handleShowSection = (id: string, fromFloating = false) => {
+  const handleShowSection = (id: string) => {
     if (id === 'activation') setShowActivationSection(true);
     if (id === 'downloads') setShowDownloadsSection(true);
-
-    if (fromFloating) {
-      setLastClickTime(prev => ({ ...prev, [id]: Date.now() }));
-    }
 
     setTimeout(() => {
       const element = document.getElementById(id);
@@ -163,18 +156,19 @@ const Index = () => {
 
       <PaymentMethods />
       <Footer />
+      <PriceBubble />
       <ScrollToTop />
 
       {/* Smart Floating Action Buttons System */}
       <div className="fixed left-5 bottom-24 flex flex-col gap-3 z-[100] pointer-events-none">
         <AnimatePresence>
           {/* VIP Activation Button */}
-          {!isHeaderVisible && activeSection !== 'activation' && (Date.now() - (lastClickTime.activation || 0) > 60000) && (
+          {!isHeaderVisible && activeSection !== 'activation' && (
             <motion.button
               initial={{ opacity: 0, x: -50, scale: 0.5 }}
               animate={{ opacity: 1, x: 0, scale: 1 }}
               exit={{ opacity: 0, x: -50, scale: 0.5 }}
-              onClick={() => handleShowSection('activation', true)}
+              onClick={() => handleShowSection('activation')}
               className="pointer-events-auto w-10 h-10 md:w-11 md:h-11 bg-primary text-black rounded-full shadow-[0_5px_15px_rgba(251,191,36,0.4)] flex items-center justify-center hover:scale-110 active:scale-95 transition-all group relative border border-white/10"
             >
               <Zap className="w-5 h-5" />
@@ -185,12 +179,12 @@ const Index = () => {
           )}
 
           {/* Download Center Button */}
-          {!isHeaderVisible && activeSection !== 'downloads' && (Date.now() - (lastClickTime.downloads || 0) > 60000) && (
+          {!isHeaderVisible && activeSection !== 'downloads' && (
             <motion.button
               initial={{ opacity: 0, x: -50, scale: 0.5 }}
               animate={{ opacity: 1, x: 0, scale: 1 }}
               exit={{ opacity: 0, x: -50, scale: 0.5 }}
-              onClick={() => handleShowSection('downloads', true)}
+              onClick={() => handleShowSection('downloads')}
               className="pointer-events-auto w-10 h-10 md:w-11 md:h-11 bg-accent text-white rounded-full shadow-[0_5px_15px_rgba(var(--accent),0.2)] flex items-center justify-center hover:scale-110 active:scale-95 transition-all group relative border border-white/10"
             >
               <Download className="w-5 h-5" />

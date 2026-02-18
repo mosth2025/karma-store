@@ -51,7 +51,7 @@ const PriceBubble = () => {
             setTimeout(() => {
                 setIsPopped(false);
                 setIsVisible(true);
-            }, 5000); // Re-appear after 5 seconds
+            }, 60000); // Re-appear after 60 seconds
         }, 600); // Duration of the "pop" animation
     };
 
