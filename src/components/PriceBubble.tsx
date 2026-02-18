@@ -5,54 +5,66 @@ import { useGeoLocation } from "@/hooks/useGeoLocation";
 
 const PriceBubble = () => {
     const [isPopped, setIsPopped] = useState(false);
-    const [isVisible, setIsVisible] = useState(true);
+    const [isVisible, setIsVisible] = useState(false);
     const { geoData } = useGeoLocation();
+
+    useEffect(() => {
+        const checkVisibility = () => {
+            const lastPopTime = localStorage.getItem("price_bubble_last_pop");
+            if (!lastPopTime) {
+                setIsVisible(true);
+                return;
+            }
+
+            const timePassed = Date.now() - parseInt(lastPopTime);
+            if (timePassed > 60000) {
+                setIsVisible(true);
+            } else {
+                setIsVisible(false);
+                // Set a timer to show it exactly when the minute is up
+                const remaining = 60000 - timePassed;
+                const timer = setTimeout(() => setIsVisible(true), remaining);
+                return () => clearTimeout(timer);
+            }
+        };
+
+        checkVisibility();
+    }, []);
 
     const getGreeting = () => {
         if (!geoData) return "مرحباً بك في كارما استور 🚀";
-
-        const country = geoData.country_name;
         const code = geoData.country_code;
+        const country = geoData.country_name;
 
         const praise: Record<string, string> = {
             "SA": "السعودية الحبيبة أهل الجود 🇸🇦",
             "AE": "الإمارات الحبيبة دار زايد 🇦🇪",
             "KW": "الكويت الغالية بلد الإنسانية 🇰🇼",
-            "QA": "قطر الشقيقة كعبة المضيوم QA",
-            "BH": "البحرين الطبيبة أهل الكرم 🇧🇭",
-            "OM": "سلطنة عمان الأصالة 🇴🇲",
-            "US": "أمريكا بلاد الحرية 🇺🇸",
-            "DE": "ألمانيا بلد الدقة والإتقان 🇩🇪",
-            "GB": "بريطانيا العريقة 🇬🇧",
-            "FR": "فرنسا بلد الجمال 🇫🇷",
-            "IT": "إيطاليا بلد الفن 🇮🇹",
-            "ES": "إسبانيا الممتعة 🇪🇸",
-            "TR": "تركيا الجميلة 🇹🇷",
+            "QA": "قطر الشقيقة QA",
+            "BH": "البحرين الطبيبة 🇧🇭",
+            "OM": "سلطنة عمان الأصلالة 🇴🇲",
             "EG": "مصر أم الدنيا بنحبكم يا أهلنا 🇪🇬",
             "LB": "لبنان الأرز والحب 🇱🇧",
             "JO": "الأردن النشامى 🇯🇴",
-            "MA": "المغرب بلاد الأصالة والجمال 🇲🇦",
+            "MA": "المغرب بلاد الأصالة 🇲🇦",
             "DZ": "الجزائر بلد الأحرار 🇩🇿",
-            "TN": "تونس الخضراء 🇹🇳",
-            "LY": "ليبيا المختار أهل الشهامة 🇱🇾",
-            "SD": "السودان الطيبة والنخوة 🇸🇩",
-            "IQ": "العراق بلد الحضارة والكرم 🇮🇶",
             "PS": "فلسطين الأبية فخر العرب 🇵🇸"
         };
-
         return `مرحباً بك أخي من ${praise[code] || country} ❤️`;
     };
 
     const handlePop = () => {
         setIsPopped(true);
-        // After popping, hide the UI completely for a bit, then reset
+        localStorage.setItem("price_bubble_last_pop", Date.now().toString());
+
         setTimeout(() => {
             setIsVisible(false);
+            // After 60s, it can re-appear
             setTimeout(() => {
                 setIsPopped(false);
                 setIsVisible(true);
-            }, 60000); // Re-appear after 60 seconds
-        }, 600); // Duration of the "pop" animation
+            }, 60000);
+        }, 600);
     };
 
     return (

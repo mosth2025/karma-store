@@ -12,7 +12,6 @@ import ExpertRecommendation from "@/components/ExpertRecommendation";
 import DownloadCenter from "@/components/DownloadCenter";
 import ScrollToTop from "@/components/ScrollToTop";
 import IboSolActivation from "@/components/IboSolActivation";
-import PriceBubble from "@/components/PriceBubble";
 import { motion, AnimatePresence } from "framer-motion";
 import { useGeoLocation } from "@/hooks/useGeoLocation";
 import { servers } from "@/data/prices";
@@ -156,7 +155,6 @@ const Index = () => {
 
       <PaymentMethods />
       <Footer />
-      <PriceBubble />
       <ScrollToTop />
 
       {/* Smart Floating Action Buttons System */}
