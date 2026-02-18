@@ -52,13 +52,15 @@ const Hero = () => {
             <span className="text-gradient block mt-3">الترفيه اللامحدود</span>
           </motion.h1>
 
+          <h2 className="sr-only">أفضل موقع لتفعيل اشتراكات IPTV ونوفا ومارفل وهيدرا</h2>
+
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6 }}
             className="text-xl md:text-2xl text-muted-foreground mb-12 max-w-2xl mx-auto leading-relaxed"
           >
-            شاهد جميع القنوات الرياضية والعالمية، أحدث الأفلام والمسلسلات بجودة تصل إلى 4K دون تقطيع.
+            كارما استور هو منصتك الأولى للحصول على اشتراكات IPTV مضمونة. شاهد جميع القنوات الرياضية والترفيهية، أحدث الأفلام والمسلسلات بجودة تصل إلى 4K دون تقطيع. تفعيل فوري لجميع السيرفرات العالمية.
           </motion.p>
 
           <motion.div

@@ -12,6 +12,7 @@ import ExpertRecommendation from "@/components/ExpertRecommendation";
 import DownloadCenter from "@/components/DownloadCenter";
 import ScrollToTop from "@/components/ScrollToTop";
 import IboSolActivation from "@/components/IboSolActivation";
+import AboutSEO from "@/components/AboutSEO";
 import { motion, AnimatePresence } from "framer-motion";
 import { useGeoLocation } from "@/hooks/useGeoLocation";
 import { servers } from "@/data/prices";
@@ -139,6 +140,7 @@ const Index = () => {
       </section>
 
       <ExpertRecommendation />
+      <AboutSEO />
       <Testimonials />
 
       <AnimatePresence>

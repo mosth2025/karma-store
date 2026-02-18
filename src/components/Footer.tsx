@@ -1,4 +1,5 @@
 import { Send, MessageCircle, ShieldCheck, Globe } from "lucide-react";
+import { Link } from "react-router-dom";
 import { trackEvent } from "@/lib/analytics";
 
 const Footer = () => {
@@ -50,6 +51,31 @@ const Footer = () => {
               <h4 className="text-white font-bold mb-2">تغطية عالمية</h4>
               <p className="text-muted-foreground text-sm">شاهد من أي مكان في العالم وبأي سرعة إنترنت.</p>
             </div>
+          </div>
+        </div>
+
+        <div className="grid md:grid-cols-4 gap-8 justify-center mb-10 text-center border-t border-white/5 pt-10">
+          <div className="space-y-4">
+            <h4 className="text-white font-bold">عن كارما استور</h4>
+            <ul className="space-y-2 text-sm">
+              <li><Link to="/#about" className="hover:text-primary transition-colors">من نحن</Link></li>
+              <li><Link to="/terms" className="hover:text-primary transition-colors">شروط الخدمة</Link></li>
+              <li><Link to="/privacy" className="hover:text-primary transition-colors">سياسة الخصوصية</Link></li>
+            </ul>
+          </div>
+          <div className="space-y-4">
+            <h4 className="text-white font-bold">الدعم والمساعدة</h4>
+            <ul className="space-y-2 text-sm">
+              <li><Link to="/faq" className="hover:text-primary transition-colors">الأسئلة الشائعة</Link></li>
+              <li><a href="https://wa.me/201114417978" target="_blank" className="hover:text-primary transition-colors">تواصل معنا واتساب</a></li>
+              <li><a href="mailto:support@karmastore.site" className="hover:text-primary transition-colors">البريد الإلكتروني</a></li>
+            </ul>
+          </div>
+          <div className="md:col-span-2 space-y-4">
+            <h4 className="text-white font-bold">لماذا تختارنا؟</h4>
+            <p className="text-xs text-muted-foreground leading-relaxed">
+              نحن نقدم أفضل خدمات الـ IPTV عالمياً منذ 5 سنوات. نوفر لك استقراراً لا مثيل له، تفعيلاً فورياً، ودعماً فنياً على مدار الساعة لضمان رضاك التام.
+            </p>
           </div>
         </div>
 
