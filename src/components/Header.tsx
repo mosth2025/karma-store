@@ -4,7 +4,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { trackEvent } from "@/lib/analytics";
 import logo from "@/assets/karmastore-logo.webp";
 
-const Header = () => {
+const Header = ({ onShowSection }: { onShowSection?: (id: string) => void }) => {
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -13,9 +13,14 @@ const Header = () => {
       navigate(`/#${id}`);
       return;
     }
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
+
+    if (onShowSection && (id === 'activation' || id === 'downloads')) {
+      onShowSection(id);
+    } else {
+      const element = document.getElementById(id);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
     }
   };
 
