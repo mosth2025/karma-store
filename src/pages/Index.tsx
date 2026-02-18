@@ -15,9 +15,17 @@ import IboSolActivation from "@/components/IboSolActivation";
 import { motion, AnimatePresence } from "framer-motion";
 import { useGeoLocation } from "@/hooks/useGeoLocation";
 import { servers } from "@/data/prices";
+import { Zap, Download } from "lucide-react";
+
 const Index = () => {
   const [showActivationSection, setShowActivationSection] = useState(false);
   const [showDownloadsSection, setShowDownloadsSection] = useState(false);
+  const [activeSection, setActiveSection] = useState<string | null>(null);
+  const [isHeaderVisible, setIsHeaderVisible] = useState(true);
+  const [lastClickTime, setLastClickTime] = useState<Record<string, number>>({
+    activation: 0,
+    downloads: 0
+  });
 
   const { geoData } = useGeoLocation();
 
@@ -27,18 +35,46 @@ const Index = () => {
     // Update visibility of sections based on hash
     if (window.location.hash === "#activation") setShowActivationSection(true);
     if (window.location.hash === "#downloads") setShowDownloadsSection(true);
+
+    const handleScroll = () => {
+      // Header visibility
+      setIsHeaderVisible(window.scrollY < 100);
+
+      // Detect active section in view
+      const sections = ['activation', 'downloads', 'servers'];
+      let currentSection = null;
+      for (const section of sections) {
+        const element = document.getElementById(section);
+        if (element) {
+          const rect = element.getBoundingClientRect();
+          // Section is considered active if it occupies the middle area of the screen
+          if (rect.top <= 300 && rect.bottom >= 300) {
+            currentSection = section;
+            break;
+          }
+        }
+      }
+      setActiveSection(currentSection);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const handleShowSection = (id: string) => {
+  const handleShowSection = (id: string, fromFloating = false) => {
     if (id === 'activation') setShowActivationSection(true);
     if (id === 'downloads') setShowDownloadsSection(true);
+
+    if (fromFloating) {
+      setLastClickTime(prev => ({ ...prev, [id]: Date.now() }));
+    }
 
     setTimeout(() => {
       const element = document.getElementById(id);
       if (element) {
         element.scrollIntoView({ behavior: "smooth" });
       }
-    }, 100);
+    }, 150);
   };
 
   const getPriceData = (server: any) => {
@@ -60,7 +96,7 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background font-cairo overflow-x-hidden">
       <TopBanner />
-      <Header onShowSection={handleShowSection} />
+      <Header onShowSection={(id) => handleShowSection(id)} />
       <Hero />
       <Features />
 
@@ -128,6 +164,43 @@ const Index = () => {
       <PaymentMethods />
       <Footer />
       <ScrollToTop />
+
+      {/* Smart Floating Action Buttons System */}
+      <div className="fixed left-5 bottom-24 flex flex-col gap-3 z-[100] pointer-events-none">
+        <AnimatePresence>
+          {/* VIP Activation Button */}
+          {!isHeaderVisible && activeSection !== 'activation' && (Date.now() - (lastClickTime.activation || 0) > 60000) && (
+            <motion.button
+              initial={{ opacity: 0, x: -50, scale: 0.5 }}
+              animate={{ opacity: 1, x: 0, scale: 1 }}
+              exit={{ opacity: 0, x: -50, scale: 0.5 }}
+              onClick={() => handleShowSection('activation', true)}
+              className="pointer-events-auto w-10 h-10 md:w-11 md:h-11 bg-primary text-black rounded-full shadow-[0_5px_15px_rgba(251,191,36,0.4)] flex items-center justify-center hover:scale-110 active:scale-95 transition-all group relative border border-white/10"
+            >
+              <Zap className="w-5 h-5" />
+              <div className="absolute right-full mr-3 bg-black/90 text-white text-[10px] font-bold px-2 py-1.5 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none backdrop-blur-sm border border-white/5 shadow-xl">
+                تفعيل VIP
+              </div>
+            </motion.button>
+          )}
+
+          {/* Download Center Button */}
+          {!isHeaderVisible && activeSection !== 'downloads' && (Date.now() - (lastClickTime.downloads || 0) > 60000) && (
+            <motion.button
+              initial={{ opacity: 0, x: -50, scale: 0.5 }}
+              animate={{ opacity: 1, x: 0, scale: 1 }}
+              exit={{ opacity: 0, x: -50, scale: 0.5 }}
+              onClick={() => handleShowSection('downloads', true)}
+              className="pointer-events-auto w-10 h-10 md:w-11 md:h-11 bg-accent text-white rounded-full shadow-[0_5px_15px_rgba(var(--accent),0.2)] flex items-center justify-center hover:scale-110 active:scale-95 transition-all group relative border border-white/10"
+            >
+              <Download className="w-5 h-5" />
+              <div className="absolute right-full mr-3 bg-black/90 text-white text-[10px] font-bold px-2 py-1.5 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none backdrop-blur-sm border border-white/5 shadow-xl">
+                مركز التحميل
+              </div>
+            </motion.button>
+          )}
+        </AnimatePresence>
+      </div>
     </div>
   );
 };
