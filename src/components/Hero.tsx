@@ -38,7 +38,7 @@ const Hero = () => {
           >
             <Zap className="w-4 h-4 text-primary animate-pulse" />
             <span className="text-primary text-sm font-bold tracking-wide">
-              أقوى اشتراك IPTV في الشرق الأوسط
+              أقوى اشتراك IPTV في العالم
             </span>
           </motion.div>
 
