@@ -160,19 +160,19 @@ const Index = () => {
       <ScrollToTop />
 
       {/* Smart Floating Action Buttons System */}
-      <div className="fixed left-5 bottom-24 flex flex-col gap-3 z-[100] pointer-events-none">
+      <div className="fixed left-5 top-1/2 -translate-y-1/2 flex flex-col gap-4 z-[100] pointer-events-none">
         <AnimatePresence>
           {/* VIP Activation Button */}
           {!isHeaderVisible && activeSection !== 'activation' && (
             <motion.button
-              initial={{ opacity: 0, x: -50, scale: 0.5 }}
+              initial={{ opacity: 0, x: -20, scale: 0.5 }}
               animate={{ opacity: 1, x: 0, scale: 1 }}
-              exit={{ opacity: 0, x: -50, scale: 0.5 }}
+              exit={{ opacity: 0, x: -20, scale: 0.5 }}
               onClick={() => handleShowSection('activation')}
               className="pointer-events-auto w-10 h-10 md:w-11 md:h-11 bg-primary text-black rounded-full shadow-[0_5px_15px_rgba(251,191,36,0.4)] flex items-center justify-center hover:scale-110 active:scale-95 transition-all group relative border border-white/10"
             >
               <Zap className="w-5 h-5" />
-              <div className="absolute right-full mr-3 bg-black/90 text-white text-[10px] font-bold px-2 py-1.5 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none backdrop-blur-sm border border-white/5 shadow-xl">
+              <div className="absolute left-full ml-3 bg-black/90 text-white text-[10px] font-bold px-2 py-1.5 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none backdrop-blur-sm border border-white/5 shadow-xl">
                 تفعيل VIP
               </div>
             </motion.button>
@@ -181,14 +181,14 @@ const Index = () => {
           {/* Download Center Button */}
           {!isHeaderVisible && activeSection !== 'downloads' && (
             <motion.button
-              initial={{ opacity: 0, x: -50, scale: 0.5 }}
+              initial={{ opacity: 0, x: -20, scale: 0.5 }}
               animate={{ opacity: 1, x: 0, scale: 1 }}
-              exit={{ opacity: 0, x: -50, scale: 0.5 }}
+              exit={{ opacity: 0, x: -20, scale: 0.5 }}
               onClick={() => handleShowSection('downloads')}
               className="pointer-events-auto w-10 h-10 md:w-11 md:h-11 bg-accent text-white rounded-full shadow-[0_5px_15px_rgba(var(--accent),0.2)] flex items-center justify-center hover:scale-110 active:scale-95 transition-all group relative border border-white/10"
             >
               <Download className="w-5 h-5" />
-              <div className="absolute right-full mr-3 bg-black/90 text-white text-[10px] font-bold px-2 py-1.5 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none backdrop-blur-sm border border-white/5 shadow-xl">
+              <div className="absolute left-full ml-3 bg-black/90 text-white text-[10px] font-bold px-2 py-1.5 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none backdrop-blur-sm border border-white/5 shadow-xl">
                 مركز التحميل
               </div>
             </motion.button>
