@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ShieldCheck, Users, Zap, Globe } from "lucide-react";
+import { ShieldCheck, Users, Zap, Globe, Mail, Phone, MapPin } from "lucide-react";
 
 const AboutSEO = () => {
     return (
@@ -25,6 +25,27 @@ const AboutSEO = () => {
                             <p>
                                 في كارما استور، نؤمن بأن الجودة هي أساس الاستمرارية، لذا نستخدم أحدث تقنيات الضغط والبث لضمان عمل الخدمة حتى مع سرعات الإنترنت الضعيفة، مع استقرار بنسبة 99.9% طوال العام.
                             </p>
+
+                            <div className="bg-white/5 p-6 rounded-2xl border border-white/10 mt-10">
+                                <h3 className="text-white font-bold mb-4 flex items-center gap-2">
+                                    <Mail className="w-5 h-5 text-primary" />
+                                    معلومات التواصل الرسمية
+                                </h3>
+                                <ul className="space-y-3 text-sm">
+                                    <li className="flex items-center gap-3">
+                                        <Phone className="w-4 h-4 text-primary" />
+                                        <span>واتساب: <a href="https://wa.me/201114417978" target="_blank" className="text-white hover:underline">+20 111 441 7978</a></span>
+                                    </li>
+                                    <li className="flex items-center gap-3">
+                                        <Mail className="w-4 h-4 text-primary" />
+                                        <span>البريد الإلكتروني: <a href="mailto:support@karmastore.site" className="text-white hover:underline">support@karmastore.site</a></span>
+                                    </li>
+                                    <li className="flex items-center gap-3">
+                                        <MapPin className="w-4 h-4 text-primary" />
+                                        <span>المقر: خدمة سحابية عالمية (Online Global Service)</span>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
 
                         <div className="grid grid-cols-2 gap-6 mt-12">

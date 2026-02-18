@@ -27,7 +27,7 @@ const Index = () => {
   const { geoData } = useGeoLocation();
 
   useEffect(() => {
-    document.title = "كارما استور | أفضل سيرفرات IPTV في العالم";
+    document.title = "كارما استور | مزود اشتراكات IPTV العالمي الرسمي";
 
     // Update visibility of sections based on hash
     if (window.location.hash === "#activation") setShowActivationSection(true);

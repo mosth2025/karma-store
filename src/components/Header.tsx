@@ -1,4 +1,4 @@
-import { MessageCircle, HelpCircle, Server, Download, Zap } from "lucide-react";
+import { MessageCircle, HelpCircle, Server, Download, Zap, Info, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { trackEvent } from "@/lib/analytics";
@@ -67,6 +67,24 @@ const Header = ({ onShowSection }: { onShowSection?: (id: string) => void }) => 
           >
             <Download className="w-4 h-4" />
             <span className="text-[9px] md:text-sm font-bold">التطبيقات</span>
+          </Button>
+
+          <Button
+            variant="ghost"
+            onClick={() => scrollToSection('about')}
+            className="flex flex-col md:flex-row gap-1 items-center text-foreground/80 hover:text-primary hover:bg-primary/5 transition-all whitespace-nowrap px-2 h-auto py-1 md:py-2"
+          >
+            <Info className="w-4 h-4" />
+            <span className="text-[9px] md:text-sm font-bold">من نحن</span>
+          </Button>
+
+          <Button
+            variant="ghost"
+            onClick={() => scrollToSection('testimonials')}
+            className="flex flex-col md:flex-row gap-1 items-center text-foreground/80 hover:text-primary hover:bg-primary/5 transition-all whitespace-nowrap px-2 h-auto py-1 md:py-2"
+          >
+            <Star className="w-4 h-4" />
+            <span className="text-[9px] md:text-sm font-bold">الآراء</span>
           </Button>
 
           <Button
