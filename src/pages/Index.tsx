@@ -165,7 +165,7 @@ const Index = () => {
       {/* Floating Action Buttons System */}
       <div className="fixed left-6 bottom-24 flex flex-col gap-3 z-[100] pointer-events-none">
         <AnimatePresence>
-          {!isHeaderVisible && activeSection !== 'activation' && (Date.now() - (lastClickTime.activation || 0) > 5000) && (
+          {!isHeaderVisible && activeSection !== 'activation' && (Date.now() - (lastClickTime.activation || 0) > 60000) && (
             <motion.button
               initial={{ opacity: 0, x: -50, scale: 0.5 }}
               animate={{ opacity: 1, x: 0, scale: 1 }}
@@ -178,7 +178,7 @@ const Index = () => {
             </motion.button>
           )}
 
-          {!isHeaderVisible && activeSection !== 'downloads' && (Date.now() - (lastClickTime.downloads || 0) > 5000) && (
+          {!isHeaderVisible && activeSection !== 'downloads' && (Date.now() - (lastClickTime.downloads || 0) > 60000) && (
             <motion.button
               initial={{ opacity: 0, x: -50, scale: 0.5 }}
               animate={{ opacity: 1, x: 0, scale: 1 }}
