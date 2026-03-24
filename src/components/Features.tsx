@@ -1,4 +1,4 @@
-import { Tv, Film, Trophy, BookOpen, Mic, Moon } from "lucide-react";
+import { Tv, Film, Trophy, BookOpen, Mic, Heart } from "lucide-react";
 import { motion } from "framer-motion";
 
 const features = [
@@ -6,7 +6,7 @@ const features = [
   { icon: Film, label: "أفلام", color: "text-red-400" },
   { icon: Tv, label: "مسلسلات", color: "text-blue-400" },
   { icon: Mic, label: "برامج ترفيهية", color: "text-yellow-400" },
-  { icon: Moon, label: "دينية", color: "text-emerald-400" },
+  { icon: Heart, label: "دينية", color: "text-emerald-400" },
   { icon: BookOpen, label: "تعليمية", color: "text-purple-400" },
 ];
 
