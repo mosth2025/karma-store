@@ -33,7 +33,7 @@ export const servers: ServerData[] = [
     },
     {
         name: "ليونز",
-        prices: { EG: 700, SA: 150, AE: 150, JO: 30, KW: 15, US: 40 },
+        prices: { EG: 1200, SA: 150, AE: 150, JO: 30, KW: 15, US: 40 },
         features: ["سنة كاملة", "أقوى سيرفرات", "جودة عالية 4K", "مكتبة أفلام ضخمة"],
     },
     {
